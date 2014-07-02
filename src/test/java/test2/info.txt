@@ -1,0 +1,2 @@
+All files ending in **/*IT.java are integration tests and are dealt by maven filesafe plugin
+All files ending in **/*Test.java are unit tests and are dealt by maven surefire plugin

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<description>Tag library</description>
+	<tlib-version>2.1</tlib-version>
+	<short-name>mytags</short-name>
+	<uri>http://test2.tags</uri>
+	<tag>
+		<name>row</name>
+		<tag-class>test2.tags.RowTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>align</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>test2.utils.TagUtils.FlexAlign</type>
+		</attribute>
+		<attribute>
+			<name>justify</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>test2.utils.TagUtils.FlexJustify</type>
+		</attribute>
+	</tag>
+	<tag>
+		<name>column</name>
+		<tag-class>test2.tags.ColumnTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>align</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>test2.utils.TagUtils.FlexAlign</type>
+		</attribute>
+		<attribute>
+			<name>justify</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>test2.utils.TagUtils.FlexJustify</type>
+		</attribute>
+	</tag>
+	
+	<!-- 	Security tags -->
+	<tag>
+		<name>allowed</name>
+		<tag-class>test2.tags.IsAllowedTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>roles</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<!-- 	Form tags -->
+	<tag>
+		<name>formBox</name>
+		<tag-class>test2.tags.FormBoxTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>formSection</name>
+		<tag-class>test2.tags.FormSectionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>formField</name>
+		<tag-class>test2.tags.FormFieldTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>label</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+</taglib>

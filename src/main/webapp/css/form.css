@@ -1,0 +1,126 @@
+<%@ page language="java" contentType="text/css; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+/*--------------------------------------------------------------
+1.0 - FORM ELEMENTS
+Examples:
+		<form style='width: 300px'>
+			<fieldset>
+				<input type="checkbox">
+				<input type="checkbox" disabled>
+				<input type="checkbox">
+			</fieldset>
+			<fieldset>
+				<input type="radio" name="radio">
+				<input type="radio" name="radio" disabled>
+				<input type="radio" name="radio">
+			</fieldset>
+			<fieldset>
+			  <input type="range" value="0">
+			</fieldset>
+			<input placeholder='First Name (required)' type='text'>
+			<input placeholder='First Name (required)' type='text' disabled>
+		</form>
+		<a href="#" class="btn">Interact with me!</a>
+		<a href="#" class="btn hover">Hover</a>
+		<a href="#" class="btn pressed">Pressed</a>
+
+--------------------------------------------------------------*/
+
+/* TEXT */
+input[type="text"]{
+    border:1px solid #ccc;
+    padding:10px;
+    margin:5px 15px;
+    border-radius:5px;
+}
+
+input[type="text"][disabled] {
+	background: rgba(191,185,169,.9);
+}
+
+/* CHECKBOX */
+input[type="checkbox"], input[type="radio"]{
+	height: 16px;
+	cursor: pointer;
+	border-radius: 3px;
+	width:16px;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	box-shadow: 0 1px 2px rgba(0,0,0,.44) inset, 0 1px 0 rgba(255,255,255,.54);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.44) inset, 0 1px 0 rgba(255,255,255,.54);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.44) inset, 0 1px 0 rgba(255,255,255,.54)
+}
+input[type="checkbox"]:checked {
+	background: url(../images/check.png) no-repeat center center;
+}
+
+input[type="checkbox"][disabled] {
+	background: rgba(191,185,169,.9);
+}
+
+/* RADIO */
+input[type="radio"] {
+	border-radius: 25px;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px
+}
+input[type="radio"]:checked {
+	background: url(../images/radio.png) no-repeat 3px center;
+}
+
+input[type="radio"][disabled] {
+	background: rgba(191,185,169,.9);
+}
+
+/* RANGE */
+input[type="range"]{
+	background: rgba(191,185,169,.2);
+	height: 8px;
+	width:100%;
+	box-shadow: 0 1px 2px rgba(0,0,0,.45) inset, 0 1px 0 rgba(255,255,255,.47);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.45) inset, 0 1px 0 rgba(255,255,255,.47);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.45) inset, 0 1px 0 rgba(255,255,255,.47);
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+}
+
+input::-webkit-slider-thumb{
+	background: #dddcdb url(../images/range-button.gif) center center;
+	border: 1px solid #909090;
+	cursor: pointer;
+	height:16px;
+	width:16px;
+	box-shadow: 0 2px 5px rgba(0,0,0,.2);
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+}
+input::-webkit-slider-thumb:active {
+	box-shadow: 0 1px 1px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.2);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+
+/*--------------------------------------------------------------
+LINE SEPARATOR
+--------------------------------------------------------------*/
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #cccccc;
+	margin: 3px 0;
+	padding: 0;
+}
+
+
+/*--------------------------------------------------------------
+2.0 - BUTTON
+TODO
+--------------------------------------------------------------*/

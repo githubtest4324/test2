@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/css; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
+/*--------------------------------------------------------------
+3.0 - TOOLTIP
+Example: <p>Vestibulum id ligula porta <span class="tooltip">felis<span class="tooltip-text">This is a tooltip<i></i></span></span> euismod semper.</p>
+--------------------------------------------------------------*/
+.tooltip {
+	cursor: default;
+	font-weight: bold;
+	text-decoration: underline;
+	position: relative;
+}
+.tooltip:hover .tooltip-text {
+	display:block;
+	top:-35px;
+}
+.tooltip-text {
+	background: -moz-linear-gradient(top, rgba(205,201,188,0.75) 0%, rgba(200,196,182,0.75) 25%, rgba(180,173,154,0.75) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(205,201,188,0.75)), color-stop(25%,rgba(200,196,182,0.75)), color-stop(100%,rgba(180,173,154,0.75)));
+	background: -webkit-linear-gradient(top, rgba(205,201,188,0.75) 0%,rgba(200,196,182,0.75) 25%,rgba(180,173,154,0.75) 100%);
+	background: -o-linear-gradient(top, rgba(205,201,188,0.75) 0%,rgba(200,196,182,0.75) 25%,rgba(180,173,154,0.75) 100%);
+	background: -ms-linear-gradient(top, rgba(205,201,188,0.75) 0%,rgba(200,196,182,0.75) 25%,rgba(180,173,154,0.75) 100%);
+	background: linear-gradient(to bottom, rgba(205,201,188,0.75) 0%,rgba(200,196,182,0.75) 25%,rgba(180,173,154,0.75) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfcdc9bc', endColorstr='#bfb4ad9a',GradientType=0 );
+	border: 1px solid #938e81;
+	color: #767268;
+	display: none;
+	left: 50%;
+	margin: 0 0 0 -65px;
+	padding: 5px;
+	position: absolute;
+	top: 0;
+	width:130px;
+	text-shadow: 0 1px 0 rgba(255,255,255,.67);
+	box-shadow: 0 2px 0 rgba(255,255,255,.76), 0 1px 0 #e1ded7;
+	-moz-box-shadow: 0 2px 0 rgba(255,255,255,.76), 0 1px 0 #e1ded7;
+	-webkit-box-shadow: 0 2px 0 rgba(255,255,255,.76), 0 1px 0 #e1ded7;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px
+}
