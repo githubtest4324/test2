@@ -9,13 +9,14 @@
 <!-- CONTENT -->
 
 <t:row justify="<%=FlexJustify.CENTER%>">
-<!-- CRITERIA -->
+	<!-- CRITERIA -->
 	<t:formBox>
-		<form:form action="list" method="POST" commandName="criteria">
+		<form:form action="list" method="POST" commandName="criteria2">
 			<t:formField label="Name"><form:input path="name"/></t:formField>
 			<t:formField label="Username"><form:input path="username"/></t:formField>
 		</form:form>
 	</t:formBox>
+	<t:table entities="${users}"></t:table>
 </t:row>
 
 

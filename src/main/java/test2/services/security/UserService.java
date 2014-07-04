@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import test2.model.User;
 import test2.utils.CriteriaUtils;
@@ -21,6 +22,7 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<User> listUsers(String critName, String critUsername) {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
 		if (critName != null) {
@@ -34,6 +36,7 @@ public class UserService {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<User> getUser(String id) {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
 		crit.add(Restrictions.eq(User.ID, id));

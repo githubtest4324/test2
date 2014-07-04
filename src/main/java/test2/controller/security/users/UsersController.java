@@ -36,12 +36,15 @@ public class UsersController extends BaseController {
 		List<User> users = userService.listUsers(null, null);
 		model.addAttribute("users", users);
 
-		return "listUsers";
+		User criteria = new User();
+		model.addAttribute("criteria", criteria);
+
+		return "security/users/userList";
 	}
 
 	@RequestMapping()
 	public String logout(SessionStatus session) {
-		return ControllerUtils.redirect(LIST);
+		return ControllerUtils.redirect(URL, LIST);
 	}
 
 }
