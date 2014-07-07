@@ -27,7 +27,8 @@
 				</t:formField>
 				<t:formField label="Retype password"><form:password path="computed.retypePassword"/></t:formField>
 			</t:formSection>
-			<input type="submit" value="Add"/>
+			<input type="submit" value="Add" name="add"/>
+			<input type="submit" value="Cancel" name="cancel"/>
 		</form:form>
 	</t:formBox>
 </t:column>

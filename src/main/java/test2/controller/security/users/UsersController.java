@@ -56,7 +56,7 @@ public class UsersController extends BaseController {
 		return "security/users/addUser";
 	}
 
-	@RequestMapping(ADD)
+	@RequestMapping(value = ADD, params = { "add" })
 	public String add(ModelMap model, @ModelAttribute("user") User user, BindingResult result) {
 		// Validations
 		if (!StringUtils.equals(user.getPassword(), user.getComputed().getRetypePassword())) {
@@ -86,6 +86,11 @@ public class UsersController extends BaseController {
 		} else {
 			return "security/users/addUser";
 		}
+	}
+
+	@RequestMapping(value = ADD, params = { "cancel" })
+	public String cancelAdd(ModelMap model) {
+		return ControllerUtils.redirect(URL, LIST);
 	}
 
 	@RequestMapping()
