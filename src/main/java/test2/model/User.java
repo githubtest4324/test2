@@ -4,12 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.GenericGenerator;
@@ -27,6 +29,7 @@ public class User implements Serializable, InterceptorEntity, ITraceable {
 	@GeneratedValue(generator = "system-uuid")
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
+	@Column(unique = true)
 	private String username;
 	private String password;
 	private String name;

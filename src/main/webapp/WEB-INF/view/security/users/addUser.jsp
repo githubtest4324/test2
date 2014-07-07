@@ -13,13 +13,17 @@
 	<t:formBox>
 		<form:form action="add" method="POST" commandName="user">
 			<t:formSection>
-				<t:formField label="Name"><form:input path="name"/></t:formField>
-				<t:formField label="Username"><form:input path="username"/></t:formField>
+				<t:formField label="Name">
+					<form:input path="name"/>
+					<form:errors path="name" cssClass="error" ></form:errors>
+				</t:formField>
+				<t:formField label="Username">
+					<form:input path="username"/>
+					<form:errors path="username" cssClass="error" ></form:errors>
+				</t:formField>
 				<t:formField label="Password">
 					<form:password path="password"/>
-					<c:if test="${!empty wrongPassword }">
-						<span style='color: red;'>Wrong password</span>
-					</c:if>
+					<form:errors path="password" cssClass="error" ></form:errors>
 				</t:formField>
 				<t:formField label="Retype password"><form:password path="computed.retypePassword"/></t:formField>
 			</t:formSection>

@@ -6,9 +6,11 @@ import java.util.Locale;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -56,11 +58,32 @@ public class UsersController extends BaseController {
 
 	@RequestMapping(ADD)
 	public String add(ModelMap model, @ModelAttribute("user") User user, BindingResult result) {
-		if (StringUtils.equals(user.getPassword(), user.getComputed().getRetypePassword())) {
-			userService.add(user);
+		// Validations
+		if (!StringUtils.equals(user.getPassword(), user.getComputed().getRetypePassword())) {
+			result.rejectValue(User.PASSWORD, "users.error.passwordDoesNotCorrespond");
+		}
+		if (StringUtils.isEmpty(user.getName())) {
+			result.rejectValue(User.NAME, "mandatory");
+		}
+		if (StringUtils.isEmpty(user.getUsername())) {
+			result.rejectValue(User.USER_NAME, "mandatory");
+		}
+		if (StringUtils.isEmpty(user.getPassword())) {
+			result.rejectValue(User.PASSWORD, "mandatory");
+		}
+
+		// Add user in db
+		if (!result.hasErrors()) {
+			try {
+				userService.add(user);
+			} catch (DataIntegrityViolationException e) {
+				result.rejectValue(User.USER_NAME, "alreadyExists");
+			}
+		}
+
+		if (!result.hasErrors()) {
 			return ControllerUtils.redirect(URL, LIST);
 		} else {
-			model.addAttribute("wrongPassword", true);
 			return "security/users/addUser";
 		}
 	}
