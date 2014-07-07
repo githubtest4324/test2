@@ -46,7 +46,7 @@ public class UsersController extends BaseController {
 		User criteria = new User();
 		model.addAttribute("criteria", criteria);
 
-		return "security/users/userList";
+		return "security/users/listUsers";
 	}
 
 	@RequestMapping(ADD_ACTION)
