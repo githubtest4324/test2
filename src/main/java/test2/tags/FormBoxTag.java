@@ -5,7 +5,6 @@ import java.io.StringWriter;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.SkipPageException;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
@@ -16,21 +15,17 @@ public class FormBoxTag extends SimpleTagSupport {
 	public void doTag() throws JspException, IOException {
 		JspWriter out = getJspContext().getOut();
 
-		try {
-			StringWriter jspBodyContent = new StringWriter();
-			JspFragment jspBody = getJspBody();
-			jspBody.invoke(jspBodyContent);
+		StringWriter jspBodyContent = new StringWriter();
+		JspFragment jspBody = getJspBody();
+		jspBody.invoke(jspBodyContent);
 
-			// Build output
-			out.append("<div class='box'>");
-			if (title != null) {
-				out.append(String.format("<div style='text-align: left;'><span>%s</span></div><hr/>", title));
-			}
-			out.append(jspBodyContent.toString());
-			out.append("</div>");
-		} catch (Exception e) {
-			throw new SkipPageException(e);
+		// Build output
+		out.append("<div class='box'>");
+		if (title != null) {
+			out.append(String.format("<div style='text-align: left;'><span>%s</span></div><hr/>", title));
 		}
+		out.append(jspBodyContent.toString());
+		out.append("</div>");
 	}
 
 	public void setTitle(String title) {

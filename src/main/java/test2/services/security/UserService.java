@@ -44,4 +44,9 @@ public class UserService {
 		return (List<User>) CriteriaUtils.findSingleResult(crit);
 	}
 
+	@Transactional
+	public void add(User user) {
+		sessionFactory.getCurrentSession().save(user);
+	}
+
 }

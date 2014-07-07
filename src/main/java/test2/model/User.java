@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.GenericGenerator;
@@ -33,6 +34,13 @@ public class User implements Serializable, InterceptorEntity, ITraceable {
 	private Set<Role> roles;
 	@Embedded
 	private TraceInformation traceable;
+
+	@Transient
+	private UserComputed computed;
+
+	public User() {
+		computed = new UserComputed();
+	}
 
 	public void onUpdate(InterceptorProxy proxy) {
 		ModelUtils.onUpdate(proxy, this);
@@ -102,6 +110,10 @@ public class User implements Serializable, InterceptorEntity, ITraceable {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public UserComputed getComputed() {
+		return computed;
 	}
 
 }

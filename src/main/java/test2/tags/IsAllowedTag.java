@@ -47,7 +47,8 @@ public class IsAllowedTag extends SimpleTagSupport {
 
 		UserPrincipal principal = (UserPrincipal) getJspContext().findAttribute("principal");
 		if (principal == null) {
-			throw new RuntimeException("Principal is not found");
+			// throw new RuntimeException("Principal is not found");
+			out.append(jspBodyContent.toString());
 		} else {
 			String[] rolesArray = roles.split(",");
 			boolean hasRole = false;
