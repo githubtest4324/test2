@@ -1,5 +1,6 @@
 package test2.utils;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Enumeration;
@@ -8,67 +9,120 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 public class ServletUtils {
-	@SuppressWarnings("rawtypes")
-	public static String getRequestAttributes(HttpServletRequest request) {
+	public static String getRequestAttributes(HttpServletRequest request) throws IOException {
+		StringWriter sw = new StringWriter();
+		PrintWriter out = new PrintWriter(sw);
+		// Show/hide stuff
+		addJs(out);
+		out.println("<a href='#' id='ra1' style='color: red;' onclick=\"showReqAttr('rb1', 'ra1'); return false;\">Request attributes</a>");
+		out.println("<div id='rb1' onclick=\"showReqAttr('ra1', 'rb1'); return false;\" style='display:none'>");
+
+		// Header
+		out.println("<table>");
+		out.println("<tr>");
+		out.println(String.format("<th>%s</th>", "Name"));
+		out.println(String.format("<th>%s</th>", "Value"));
+		out.println("</tr>");
+
+		// Content
+		@SuppressWarnings("rawtypes")
 		Enumeration reqAttrs = request.getAttributeNames();
-		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
-
-		pw.println();
-		pw.println("REQUEST ATTRS");
-		pw.println("-------------");
 		while (reqAttrs.hasMoreElements()) {
-			String atributeName = (String) reqAttrs.nextElement();
-			pw.println("ATTR: " + atributeName + ", " + request.getAttribute(atributeName) + " )");
+			String name = (String) reqAttrs.nextElement();
+			String value = request.getAttribute(name).toString();
+			out.println("<tr>");
+			out.println(String.format("<td>%s</td>", name));
+			out.println(String.format("<td>%s</td>", value));
+			out.println("</tr>");
 		}
-		pw.close();
+		out.println("</table>");
+		out.println("</div>");
+
+		out.close();
 		return sw.toString();
 	}
 
-	@SuppressWarnings("rawtypes")
-	public static String getSessionAttributes(HttpServletRequest request) {
+	public static String getSessionAttributes(HttpServletRequest request) throws IOException {
+		StringWriter sw = new StringWriter();
+		PrintWriter out = new PrintWriter(sw);
+		@SuppressWarnings("rawtypes")
 		Enumeration sessAttrs = request.getSession().getAttributeNames();
-		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
 
-		pw.println();
-		pw.println("SESSION ATTRS");
-		pw.println("-------------");
+		// Show/hide stuff
+		addJs(out);
+		out.println("<a href='#' id='ra2' style='color: red;' onclick=\"showReqAttr('rb2', 'ra2'); return false;\">Session attributes</a>");
+		out.println("<div id='rb2' onclick=\"showReqAttr('ra2', 'rb2'); return false;\" style='display:none'>");
+
+		// Header
+		out.println("<table>");
+		out.println("<tr>");
+		out.println(String.format("<th>%s</th>", "Name"));
+		out.println(String.format("<th>%s</th>", "Value"));
+		out.println("</tr>");
+
+		// Content
 		while (sessAttrs.hasMoreElements()) {
-			String atributeName = (String) sessAttrs.nextElement();
-			pw.println("ATTR: " + atributeName + ", " + request.getSession().getAttribute(atributeName) + " )");
+			String name = (String) sessAttrs.nextElement();
+			String value = request.getSession().getAttribute(name).toString();
+			out.println("<tr>");
+			out.println(String.format("<td>%s</td>", name));
+			out.println(String.format("<td>%s</td>", value));
+			out.println("</tr>");
 		}
-		pw.close();
+		out.println("</table>");
+		out.println("</div>");
+
+		out.close();
 		return sw.toString();
 	}
 
-	@SuppressWarnings("rawtypes")
-	public static String getRequestParameters(HttpServletRequest request) {
-		Enumeration reqParams = request.getParameterNames();
+	public static String getRequestParameters(HttpServletRequest request) throws IOException {
 		StringWriter sw = new StringWriter();
-		PrintWriter pw = new PrintWriter(sw);
+		PrintWriter out = new PrintWriter(sw);
+		@SuppressWarnings("rawtypes")
+		Enumeration reqParams = request.getParameterNames();
 
-		pw.println();
-		pw.println("REQEST PARAMS");
-		pw.println("-------------");
+		// Show/hide stuff
+		addJs(out);
+		out.println("<a href='#' id='ra3' style='color: red;' onclick=\"showReqAttr('rb3', 'ra3'); return false;\">Request parameters</a>");
+		out.println("<div id='rb3' onclick=\"showReqAttr('ra3', 'rb3'); return false;\" style='display:none'>");
+
+		// Header
+		out.println("<table>");
+		out.println("<tr>");
+		out.println(String.format("<th>%s</th>", "Name"));
+		out.println(String.format("<th>%s</th>", "Value"));
+		out.println("</tr>");
+
+		// Content
 		while (reqParams.hasMoreElements()) {
-			String atributeName = (String) reqParams.nextElement();
-			if (request.getParameterMap().get(atributeName) instanceof String[]) {
+			String name = (String) reqParams.nextElement();
+			String value;
+			if (request.getParameterMap().get(name) instanceof String[]) {
 				StringBuffer paramMsg = new StringBuffer();
-				String[] params = (String[]) request.getParameterMap().get(atributeName);
+				String[] params = (String[]) request.getParameterMap().get(name);
 				for (int i = 0; i < params.length; i++) {
 					if (i != 0) {
 						paramMsg.append(", ");
 					}
 					paramMsg.append(params[i]);
 				}
-				pw.println("ATTR: " + atributeName + ", " + paramMsg);
+				value = paramMsg.toString();
 			} else {
-				pw.println("ATTR: " + atributeName + ", " + request.getParameterMap().get(atributeName) + " )");
+				value = request.getParameterMap().get(name).toString();
 			}
+			out.println("<tr>");
+			out.println(String.format("<td>%s</td>", name));
+			out.println(String.format("<td>%s</td>", value));
+			out.println("</tr>");
 		}
-		pw.close();
+
+		out.println("</table>");
+		out.println("</div>");
+
+		out.close();
 		return sw.toString();
+
 	}
 
 	/**
@@ -121,4 +175,14 @@ public class ServletUtils {
 		out.println("</TABLE></CENTER></BODY></HTML>");
 		return sw.toString();
 	}
+
+	private static void addJs(PrintWriter out) throws IOException {
+		out.println("<script type='text/javascript'>");
+		out.println("function showReqAttr(id1, id2) {");
+		out.println("    document.getElementById(id1).style.display = 'block';");
+		out.println("    document.getElementById(id2).style.display = 'none';");
+		out.println("}");
+		out.println("</script>");
+	}
+
 }

@@ -11,8 +11,20 @@
 	<!-- 	DEBUG TAGS -->		
 	<tag>
 		<name>debugRequestAttributes</name>
-		<tag-class>test2.tags.DebutRequestAttributesTag</tag-class>
+		<tag-class>test2.tags.DebugRequestAttributesTag</tag-class>
 		<body-content>scriptless</body-content>
+		<attribute>
+			<name>showRequestAttributes</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>showSessionAttributes</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>showRequestParameters</name>
+			<required>false</required>
+		</attribute>
 	</tag>
 	
 	<tag>

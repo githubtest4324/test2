@@ -121,12 +121,38 @@ hr {
 
 /*--------------------------------------------------------------
 ERROR
+				<t:formField label="Name">
+					<form:input path="name"/>
+					<form:errors path="name" cssClass="error" ></form:errors>
+				</t:formField>
 --------------------------------------------------------------*/
 .error {
 	color: red;
 }
 
 /*--------------------------------------------------------------
-2.0 - BUTTON
+TABLE
+--------------------------------------------------------------*/
+table {
+	border-collapse: collapse;
+}
+tr:nth-of-type(odd) {
+	background: #C2D6D6;
+}
+
+th {
+	background: #669999;
+	color: white;
+	font-weight: bold;
+}
+
+td,th {
+	padding: 6px;
+	border: 1px solid #ccc;
+	text-align: left;
+}
+
+/*--------------------------------------------------------------
+BUTTON
 TODO
 --------------------------------------------------------------*/
