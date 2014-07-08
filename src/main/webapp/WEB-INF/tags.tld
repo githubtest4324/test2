@@ -10,8 +10,8 @@
 	
 	<!-- 	DEBUG TAGS -->		
 	<tag>
-		<name>debugRequestAttributes</name>
-		<tag-class>test2.tags.DebugRequestAttributesTag</tag-class>
+		<name>debugServletAttributes</name>
+		<tag-class>test2.tags.DebugServletAttributesTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>showRequestAttributes</name>
@@ -23,6 +23,14 @@
 		</attribute>
 		<attribute>
 			<name>showRequestParameters</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>showRequestHeaders</name>
+			<required>false</required>
+		</attribute>
+		<attribute>
+			<name>showCgiVariables</name>
 			<required>false</required>
 		</attribute>
 	</tag>

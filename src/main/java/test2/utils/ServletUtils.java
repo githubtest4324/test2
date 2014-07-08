@@ -14,7 +14,7 @@ public class ServletUtils {
 		PrintWriter out = new PrintWriter(sw);
 		// Show/hide stuff
 		addJs(out);
-		out.println("<a href='#' id='ra1' style='color: red;' onclick=\"showReqAttr('rb1', 'ra1'); return false;\">Request attributes</a>");
+		out.println("<a href='#' id='ra1' style='color: red; display:block display:block' onclick=\"showReqAttr('rb1', 'ra1'); return false;\">Request attributes</a>");
 		out.println("<div id='rb1' onclick=\"showReqAttr('ra1', 'rb1'); return false;\" style='display:none'>");
 
 		// Header
@@ -50,7 +50,7 @@ public class ServletUtils {
 
 		// Show/hide stuff
 		addJs(out);
-		out.println("<a href='#' id='ra2' style='color: red;' onclick=\"showReqAttr('rb2', 'ra2'); return false;\">Session attributes</a>");
+		out.println("<a href='#' id='ra2' style='color: red; display:block' onclick=\"showReqAttr('rb2', 'ra2'); return false;\">Session attributes</a>");
 		out.println("<div id='rb2' onclick=\"showReqAttr('ra2', 'rb2'); return false;\" style='display:none'>");
 
 		// Header
@@ -84,7 +84,7 @@ public class ServletUtils {
 
 		// Show/hide stuff
 		addJs(out);
-		out.println("<a href='#' id='ra3' style='color: red;' onclick=\"showReqAttr('rb3', 'ra3'); return false;\">Request parameters</a>");
+		out.println("<a href='#' id='ra3' style='color: red; display:block' onclick=\"showReqAttr('rb3', 'ra3'); return false;\">Request parameters</a>");
 		out.println("<div id='rb3' onclick=\"showReqAttr('ra3', 'rb3'); return false;\" style='display:none'>");
 
 		// Header
@@ -125,22 +125,37 @@ public class ServletUtils {
 
 	}
 
-	/**
-	 * The following method may be used to gather request headers
-	 */
 	public static String getRequestHeaders(HttpServletRequest request) {
 		StringWriter sw = new StringWriter();
 		PrintWriter out = new PrintWriter(sw);
+
+		// Show/hide stuff
+		addJs(out);
+		out.println("<a href='#' id='ra4' style='color: red; display:block' onclick=\"showReqAttr('rb4', 'ra4'); return false;\">Request Headers</a>");
+		out.println("<div id='rb4' onclick=\"showReqAttr('ra4', 'rb4'); return false;\" style='display:none'>");
+
 		out.println("<B>Request Method: </B>" + request.getMethod() + "<BR>\n" + "<B>Request URI: </B>" + request.getRequestURI()
-				+ "<BR>\n" + "<B>Request Protocol: </B>" + request.getProtocol() + "<BR><BR>\n"
-				+ "<TABLE BORDER=1 ALIGN=\"CENTER\">\n" + "<TR BGCOLOR=\"#FFAD00\">\n" + "<TH>Header Name<TH>Header Value");
+				+ "<BR>\n" + "<B>Request Protocol: </B>" + request.getProtocol() + "<BR><BR>\n");
+
+		// Header
+		out.println("<table>");
+		out.println("<tr>");
+		out.println(String.format("<th>%s</th>", "Name"));
+		out.println(String.format("<th>%s</th>", "Value"));
+		out.println("</tr>");
+
+		@SuppressWarnings("rawtypes")
 		Enumeration headerNames = request.getHeaderNames();
 		while (headerNames.hasMoreElements()) {
 			String headerName = (String) headerNames.nextElement();
-			out.println("<TR><TD>" + headerName);
-			out.println("<TD>" + request.getHeader(headerName));
+			out.println("<tr>");
+			out.println(String.format("<td>%s</td>", headerName));
+			out.println(String.format("<td>%s</td>", request.getHeader(headerName)));
+			out.println("</tr>");
 		}
-		out.println("</TABLE>\n");
+
+		out.println("</table>");
+		out.println("</div>");
 
 		return sw.toString();
 	}
@@ -160,23 +175,38 @@ public class ServletUtils {
 				{ "SCRIPT_NAME", request.getServletPath() }, { "SERVER_NAME", request.getServerName() },
 				{ "SERVER_PORT", String.valueOf(request.getServerPort()) }, { "SERVER_PROTOCOL", request.getProtocol() },
 				{ "SERVER_SOFTWARE", context.getServerInfo() } };
-		String title = "Servlet Example: Showing CGI Variables";
-		String docType = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 " + "Transitional//EN\">\n";
-		out.println(docType + "<HTML>\n" + "<HEAD><TITLE>" + title + "</TITLE></HEAD>\n" + "<BODY BGCOLOR=\"#FDF5E6\">\n"
-				+ "<CENTER>\n" + "<H1>" + title + "</H1>\n" + "<TABLE BORDER=1>\n" + " <TR BGCOLOR=\"#FFAD00\">\n"
-				+ "<TH>CGI Variable Name<TH>Value");
+
+		// Show/hide stuff
+		addJs(out);
+		out.println("<a href='#' id='ra5' style='color: red; display:block' onclick=\"showReqAttr('rb5', 'ra5'); return false;\">Cgi variables</a>");
+		out.println("<div id='rb5' onclick=\"showReqAttr('ra5', 'rb5'); return false;\" style='display:none'>");
+
+		// Header
+		out.println("<table>");
+		out.println("<tr>");
+		out.println(String.format("<th>%s</th>", "Name"));
+		out.println(String.format("<th>%s</th>", "Value"));
+		out.println("</tr>");
+
 		for (int i = 0; i < variables.length; i++) {
 			String varName = variables[i][0];
 			String varValue = variables[i][1];
-			if (varValue == null)
+			if (varValue == null) {
 				varValue = "<I>Not specified</I>";
-			out.println(" <TR><TD>" + varName + "<TD>" + varValue);
+			}
+			out.println("<tr>");
+			out.println(String.format("<td>%s</td>", varName));
+			out.println(String.format("<td>%s</td>", varValue));
+			out.println("</tr>");
 		}
-		out.println("</TABLE></CENTER></BODY></HTML>");
+
+		out.println("</table>");
+		out.println("</div>");
+
 		return sw.toString();
 	}
 
-	private static void addJs(PrintWriter out) throws IOException {
+	private static void addJs(PrintWriter out) {
 		out.println("<script type='text/javascript'>");
 		out.println("function showReqAttr(id1, id2) {");
 		out.println("    document.getElementById(id1).style.display = 'block';");

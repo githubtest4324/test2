@@ -1,10 +1,8 @@
 package test2.tags;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Enumeration;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
@@ -13,16 +11,22 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import test2.utils.ServletUtils;
 
-public class DebugRequestAttributesTag extends SimpleTagSupport {
+public class DebugServletAttributesTag extends SimpleTagSupport {
 	Boolean showRequestAttributes = false;
 	Boolean showSessionAttributes = false;
 	Boolean showRequestParameters = false;
+	Boolean showRequestHeaders = false;
+	Boolean showCgiVariables = false;
 
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = getJspContext().getOut();
 		HttpServletRequest request = ((HttpServletRequest) ((PageContext) getJspContext()).getRequest());
+		ServletContext context = ((PageContext) getJspContext()).getServletContext();
 
+		if (showCgiVariables) { // Seems this must not the last to be shown, otherwise it is not visible
+			out.append(ServletUtils.getCgiVariables(request, context));
+		}
 		if (showRequestAttributes) {
 			out.append(ServletUtils.getRequestAttributes(request));
 		}
@@ -31,6 +35,9 @@ public class DebugRequestAttributesTag extends SimpleTagSupport {
 		}
 		if (showRequestParameters) {
 			out.append(ServletUtils.getRequestParameters(request));
+		}
+		if (showRequestHeaders) {
+			out.append(ServletUtils.getRequestHeaders(request));
 		}
 	}
 
@@ -44,6 +51,14 @@ public class DebugRequestAttributesTag extends SimpleTagSupport {
 
 	public void setShowRequestParameters(Boolean showRequestParameters) {
 		this.showRequestParameters = showRequestParameters;
+	}
+
+	public void setShowRequestHeaders(Boolean showRequestHeaders) {
+		this.showRequestHeaders = showRequestHeaders;
+	}
+
+	public void setShowCgiVariables(Boolean showCgiVariables) {
+		this.showCgiVariables = showCgiVariables;
 	}
 
 }

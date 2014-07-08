@@ -29,7 +29,7 @@
 	</t:formBox>
 </t:column>
 
-<t:debugRequestAttributes showRequestAttributes="true" showRequestParameters="true" showSessionAttributes="true"/>
+<t:debugServletAttributes showRequestAttributes="true" showRequestParameters="true" showSessionAttributes="true" showCgiVariables="true" showRequestHeaders="true"/>
 
 
 <!-- FOOTER -->
