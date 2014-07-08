@@ -7,6 +7,14 @@
 	<tlib-version>2.1</tlib-version>
 	<short-name>mytags</short-name>
 	<uri>http://test2.tags</uri>
+	
+	<!-- 	DEBUG TAGS -->		
+	<tag>
+		<name>debugRequestAttributes</name>
+		<tag-class>test2.tags.DebutRequestAttributesTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
 	<tag>
 		<name>row</name>
 		<tag-class>test2.tags.RowTag</tag-class>

@@ -29,7 +29,7 @@
 	</t:formBox>
 </t:column>
 
-
+<t:debugRequestAttributes />
 
 
 <!-- FOOTER -->
