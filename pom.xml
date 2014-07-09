@@ -3,7 +3,7 @@
 <!-- For debugging a failsafe or surefire safe: -->
 <!-- 1. Open the Debug As > .. dialogue box -->
 <!-- 2. In the goal text box, give -->
-<!--      -DforkMode=never test -->
+<!-- -DforkMode=never test -->
 <!-- 3. Run the debug project -->
 
 <!-- Run integration tests: -->
@@ -23,7 +23,7 @@
 		<hibernate.version>3.6.10.Final</hibernate.version>
 		<slf4j.version>1.6.1</slf4j.version>
 	</properties>
-	
+
 	<dependencies>
 
 		<!-- avoid conflict with jboss 4 hibernate libs -->
@@ -244,6 +244,11 @@
 			<version>5.1.9</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jamon</groupId>
+			<artifactId>jamon-runtime</artifactId>
+			<version>2.4.1</version>
+		</dependency>
 	</dependencies>
 
 
@@ -297,40 +302,22 @@
 			</resource>
 		</resources>
 		<plugins>
-			<!-- Precompile jsps -->
-			<!-- standard-xx.jar and jstl-xx.jar need to have scope 'compile' from 
-				war to avoid The absolute uri: http://java.sun.com/jsp/jstl/core cannot be 
-				resolved in either web.xml or the jar files deployed with this application 
-				eror -->
-			<!-- <plugin> -->
-			<!-- <groupId>org.codehaus.mojo.jspc</groupId> -->
-			<!-- <artifactId>jspc-maven-plugin</artifactId> -->
-			<!-- <version>2.0-alpha-3</version> -->
-			<!-- <executions> -->
-			<!-- <execution> -->
-			<!-- <goals> -->
-			<!-- <goal>compile</goal> -->
-			<!-- </goals> -->
-			<!-- </execution> -->
-			<!-- </executions> -->
-			<!-- <dependencies> -->
-			<!-- <dependency> -->
-			<!-- <groupId>org.codehaus.mojo.jspc</groupId> -->
-			<!-- <artifactId>jspc-compiler-tomcat6</artifactId> -->
-			<!-- <version>2.0-alpha-3</version> -->
-			<!-- </dependency> -->
-			<!-- </dependencies> -->
-			<!-- </plugin> -->
-
-			<!-- Copy war into tomcat -->
-			<!-- <plugin> -->
-			<!-- <groupId>org.apache.maven.plugins</groupId> -->
-			<!-- <artifactId>maven-war-plugin</artifactId> -->
-			<!-- <version>2.4</version> -->
-			<!-- <configuration> -->
-			<!-- <outputDirectory>/media/data/e/devel/apache-tomcat-7.0.54/webapps</outputDirectory> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
+			<plugin>
+				<groupId>org.jamon</groupId>
+				<artifactId>jamon-maven-plugin</artifactId>
+				<version>2.4.2</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>translate</goal>
+						</goals>
+						<configuration>
+<!-- 							<templateOutputDir>src/main/java</templateOutputDir> -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

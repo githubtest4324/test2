@@ -1,0 +1,24 @@
+<%import>
+	test2.model.User;
+	java.util.List;
+	java.io.Serializable;
+</%import>
+<%args>
+	List<Serializable> entities;
+</%args>
+
+<table style='width: 100%;'>
+	<tr>
+		<th>Name</th>
+		<th>Username</th>
+	</tr>
+		
+	<%for Serializable entity : entities %>
+		<%java User user = (User) entity; %>
+		<tr>
+			<td><% user.getName() %></td>
+			<td><% user.getUsername() %></td>
+		</tr>
+	</%for>
+</table>
+		
