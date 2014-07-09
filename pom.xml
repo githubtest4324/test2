@@ -23,6 +23,7 @@
 		<hibernate.version>3.6.10.Final</hibernate.version>
 		<slf4j.version>1.6.1</slf4j.version>
 	</properties>
+	
 	<dependencies>
 
 		<!-- avoid conflict with jboss 4 hibernate libs -->
@@ -247,6 +248,8 @@
 
 
 	<profiles>
+		<!-- AUTOMATED TESTS PROFILE -->
+		<!-- use mvn -Pintegration verify -->
 		<profile>
 			<id>integration</id>
 			<build>
@@ -287,6 +290,12 @@
 
 	<build>
 		<finalName>test2Artifact</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- Precompile jsps -->
 			<!-- standard-xx.jar and jstl-xx.jar need to have scope 'compile' from 
