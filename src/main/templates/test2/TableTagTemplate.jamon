@@ -7,18 +7,21 @@
 	List<Serializable> entities;
 </%args>
 
-<table style='width: 100%;'>
-	<tr>
-		<th>Name</th>
-		<th>Username</th>
-	</tr>
-		
-	<%for Serializable entity : entities %>
-		<%java User user = (User) entity; %>
+<table style='width: 100%;' class='smartTableUnselectable'>
+	<thead>
 		<tr>
-			<td><% user.getName() %></td>
-			<td><% user.getUsername() %></td>
+			<th>Name</th>
+			<th>Username</th>
 		</tr>
-	</%for>
+	</thead>
+	<tbody>
+		<%for Serializable entity : entities %>
+			<%java User user = (User) entity; %>
+			<tr onmousedown="RowClick(this,false);">
+				<td><% user.getName() %></td>
+				<td><% user.getUsername() %></td>
+			</tr>
+		</%for>
+	</tbody>
 </table>
 		

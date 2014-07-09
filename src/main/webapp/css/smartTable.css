@@ -1,0 +1,17 @@
+/*
+<%@ page language="java" contentType="text/css; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+*/
+
+
+.smartTablSeselected {
+	background: lightBlue !important;
+}
+
+.smartTableUnselectable {
+	user-select: none;
+	-khtml-user-select: none;
+	-o-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+}

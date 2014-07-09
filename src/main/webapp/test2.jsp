@@ -8,92 +8,94 @@
 <%@include file="/WEB-INF/view/pageTemplate/header.jsp"%>
 
 <!-- CONTENT-->
-	<div id="main">
-		<nav>
-			<ul>
-				<li><a href="http://localhost:8081/test2Artifact/home">Home</a></li>
-				<li><a href="http://localhost:8081/test2Artifact/security/users/list#">Orders</a>
-					<ul>
-						<li><a href="http://localhost:8081/test2Artifact/orders/orders/list/main">Orders</a></li>
-						<li><a href="http://localhost:8081/test2Artifact/security/users/list#">Employees</a>
-							<ul>
-								<li><a href="http://localhost:8081/test2Artifact/employees/list/main">Test</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-				
-					
-					
-						<li><a href="http://localhost:8081/test2Artifact/security/users/list#">Security</a>
-							<ul>
-								
-										<li><a href="http://localhost:8081/test2Artifact/security/users">Users</a></li>
-								
-								<li><a href="http://localhost:8081/test2Artifact/login/logout">Logout</a></li>
-							</ul>
-						</li>
-					
-				
-			</ul>
-		</nav>
+	<style type="text/css">
+	.selected {
+		background: lightBlue !important;
+	}
+</style>
 
-<!-- CONTENT -->
 
-<div style="display: flex;flex-direction: column;">
-	<!-- CRITERIA -->
-	<div class="box">
-		<form id="criteria" action="./Users_files/Users.htm" method="POST">
-			<div style="display: flex;flex-direction: row;align-items: center;"><span>Name</span><input id="name" name="name" type="text" value=""></div>
-			<div style="display: flex;flex-direction: row;align-items: center;"><span>Username</span><input id="username" name="username" type="text" value=""></div>
-		</form>
-	</div>
-	<div style="display: flex;flex-direction: row;justify-content: flex-start;">
-		<form id="command" action="http://localhost:8081/test2Artifact/security/users/addAction" method="POST">
-			<input type="submit" value="Add user">
-		</form>
-	</div>
-	
-	<!-- 	CONTENT -->
-	<div class="box">
-		<table><tbody><tr><th>Name</th><th>Username</th></tr><tr><td>Liviu</td><td>liviu</td></tr><tr><td>a</td><td>liviu2</td></tr><tr><td>Administrator</td><td>admin</td></tr></tbody></table>
-	</div>
+
+<div class="box">
+	<table id='tableStudent' style="width: 100%;">
+		<thead>
+			<tr onmousedown="RowClick(this,false);">
+				<th style='display: none'>Id</th>
+				<th>Name</th>
+				<th>Username</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr onmousedown="RowClick(this,false);">
+				<td style='display: none'>id1</td>
+				<td>Liviu</td>
+				<td>liviu</td>
+			</tr>
+
+			<tr onmousedown="RowClick(this,false);">
+				<td style='display: none'>id2</td>
+				<td>a</td>
+				<td>liviu2</td>
+			</tr>
+
+			<tr onmousedown="RowClick(this,false);">
+				<td style='display: none'>id3</td>
+				<td>Administrator</td>
+				<td>admin</td>
+			</tr>
+
+		</tbody>
+	</table>
+
 </div>
 
+<script type="text/javascript">
+var lastSelectedRow;
+var trs = document.getElementById('tableStudent').tBodies[0].getElementsByTagName('tr');
 
+// disable text selection
+document.onselectstart = function() {
+    return false;
+}
 
-<script type='text/javascript'>
-function showReqAttr(id1, id2) {
-    document.getElementById(id1).style.display = 'block';
-    // hide the lorem ipsum text
-    document.getElementById(id2).style.display = 'none';
+function RowClick(currenttr, lock) {
+    if (window.event.ctrlKey) {
+        toggleRow(currenttr);
+    }
+    
+    if (window.event.button === 0) {
+        if (!window.event.ctrlKey && !window.event.shiftKey) {
+            clearAll();
+            toggleRow(currenttr);
+        }
+    
+        if (window.event.shiftKey) {
+            selectRowsBetweenIndexes([lastSelectedRow.rowIndex, currenttr.rowIndex])
+        }
+    }
+}
+
+function toggleRow(row) {
+    row.className = row.className == 'selected' ? '' : 'selected';
+    lastSelectedRow = row;
+}
+
+function selectRowsBetweenIndexes(indexes) {
+    indexes.sort(function(a, b) {
+        return a - b;
+    });
+
+    for (var i = indexes[0]; i <= indexes[1]; i++) {
+        trs[i-1].className = 'selected';
+    }
+}
+
+function clearAll() {
+    for (var i = 0; i < trs.length; i++) {
+        trs[i].className = '';
+    }
 }
 </script>
-
-<a href='#' id='reqparamslink' style='color: red;' onclick="showReqAttr('reqparams', 'reqparamslink'); return false;">Request attributes</a>
-<div id='reqparams' onclick="showReqAttr('reqparamslink', 'reqparams'); return false;" style="display:none">
-	<table>
-	<tbody>
-		<tr>
-			<th>Name</th>
-			<th>Value</th>
-		</tr>
-		<tr>
-			<td>javax.servlet.forward.request_uri</td>
-			<td>/test2Artifact/security/users/list</td>
-		</tr>
-		<tr>
-			<td>javax.servlet.forward.context_path</td>
-			<td>/test2Artifact</td>
-		</tr>
-		<tr>
-			<td>javax.servlet.forward.servlet_path</td>
-			<td>/security/users/list</td>
-		</tr>
-	</tbody>
-	</table>
-</div>
-
 
 
 

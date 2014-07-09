@@ -19,5 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/body.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/form.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/flex.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/smartTable.css" />
+	<script language="javascript" type="text/javascript" src="${root}/js/smartTable.js" ></script>
 	<title>${title}</title>
 </head>
