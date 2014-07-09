@@ -24,7 +24,7 @@ public class SecurityService {
 	public boolean hasRole(String username, String roleName) {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
 		crit.createCriteria(User.ROLES).add(Restrictions.eq(Role.NAME, roleName));
-		crit.add(Restrictions.eq(User.USER_NAME, username));
+		crit.add(Restrictions.eq(User.USERNAME, username));
 		@SuppressWarnings("unchecked")
 		List<User> list = crit.list();
 		if (list.size() == 1) {

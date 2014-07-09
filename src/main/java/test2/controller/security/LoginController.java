@@ -40,7 +40,8 @@ public class LoginController extends BaseController {
 			model.addAttribute("principal", new UserPrincipal(user.getUsername()));
 			return ControllerUtils.redirect(HomeController.URL, HomeController.MAIN);
 		} else {
-			model.addAttribute("outcome", false);
+			// model.addAttribute("outcome", false);
+			result.reject("login.error.accessDenied");
 			logger.info("Wrong username or password");
 			return "login";
 		}

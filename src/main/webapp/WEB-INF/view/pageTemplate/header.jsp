@@ -35,5 +35,5 @@
 				</c:choose>
 			</ul>
 		</nav>
-		<span style='margin-right: 20px'>${principal.name} - <spring:message code="version"/></span>
+		<span style='margin-right: 20px; color: #999999; font-size: x-small;'>${principal.name} - <spring:message code="version"/></span>
 	</t:row>

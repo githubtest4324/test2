@@ -29,7 +29,7 @@ public class UserService {
 			crit.add(Restrictions.like(User.NAME, "%" + critName + "%"));
 		}
 		if (critUsername != null) {
-			crit.add(Restrictions.like(User.USER_NAME, "%" + critUsername + "%"));
+			crit.add(Restrictions.like(User.USERNAME, "%" + critUsername + "%"));
 		}
 
 		return crit.list();

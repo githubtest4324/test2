@@ -66,7 +66,7 @@ public class UsersController extends BaseController {
 			result.rejectValue(User.NAME, "mandatory");
 		}
 		if (StringUtils.isEmpty(user.getUsername())) {
-			result.rejectValue(User.USER_NAME, "mandatory");
+			result.rejectValue(User.USERNAME, "mandatory");
 		}
 		if (StringUtils.isEmpty(user.getPassword())) {
 			result.rejectValue(User.PASSWORD, "mandatory");
@@ -77,7 +77,7 @@ public class UsersController extends BaseController {
 			try {
 				userService.add(user);
 			} catch (DataIntegrityViolationException e) {
-				result.rejectValue(User.USER_NAME, "alreadyExists");
+				result.rejectValue(User.USERNAME, "alreadyExists");
 			}
 		}
 

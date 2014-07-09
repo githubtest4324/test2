@@ -24,7 +24,7 @@ public class LoginService {
 	@Transactional
 	public boolean isValidLogin(String username, String password) {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
-		crit.add(Restrictions.eq(User.USER_NAME, username)).add(Restrictions.eq(User.PASSWORD, password));
+		crit.add(Restrictions.eq(User.USERNAME, username)).add(Restrictions.eq(User.PASSWORD, password));
 		List<User> list = crit.list();
 		if (list.size() == 1) {
 			return true;

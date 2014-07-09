@@ -65,7 +65,7 @@ public class User implements Serializable, InterceptorEntity, ITraceable {
 		this.id = id;
 	}
 
-	public static final String USER_NAME = "username";
+	public static final String USERNAME = "username";
 
 	public String getUsername() {
 		return username;

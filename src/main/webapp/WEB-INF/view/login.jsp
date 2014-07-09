@@ -17,13 +17,13 @@
 				<t:formField label="Password">
 					<form:password path="password"/>
 				</t:formField>
+				<form:errors cssClass="error"></form:errors>
 			</t:formSection>
 			<input type="submit" value="Login"/>
 		</form:form>
 	</t:formBox>
 </t:row>
-Outcome <c:if test="${!empty outcome}">${outcome}</c:if>
-
+<t:debugServletAttributes showRequestAttributes="true"/>
 
 
 
