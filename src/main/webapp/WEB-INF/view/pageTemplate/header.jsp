@@ -1,10 +1,11 @@
+<%@page import="test2.utils.TagUtils.FlexJustify"%>
 <%@page import="test2.utils.TagUtils.FlexAlign"%>
 <%@page import="java.io.IOException"%>
 <%@include file="preLoginHeader.jsp"%>
 <%@taglib uri="http://test2.tags" prefix="t"%>
 
 <body>
-	<t:row align="<%=FlexAlign.CENTER %>">
+	<t:row align="<%=FlexAlign.CENTER %>" justify="<%=FlexJustify.SPACE_BETWEEN %>">
 		<nav>
 			<ul>
 				<li><a href="${root}/home"><spring:message code="nav.home" /></a></li>
@@ -35,5 +36,5 @@
 				</c:choose>
 			</ul>
 		</nav>
-		<span style='margin-right: 20px; color: #999999; font-size: x-small;'>${principal.name} - <spring:message code="version"/></span>
+		<span style='margin-right: 10px; color: #999999; font-size: x-small;'>${principal.name} - <spring:message code="version"/></span>
 	</t:row>

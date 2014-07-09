@@ -23,7 +23,6 @@
 		</form:form>
 	</t:formBox>
 </t:row>
-<t:debugServletAttributes showRequestAttributes="true"/>
 
 
 

@@ -20,7 +20,7 @@ public class TableTag extends SimpleTagSupport {
 	@Override
 	public void doTag() throws JspException, IOException {
 		JspWriter out = getJspContext().getOut();
-		out.append("<table>");
+		out.append("<table style='width: 100%;'>");
 		// Header
 		out.append("<tr>");
 		out.append(String.format("<th>%s</th>", "Name"));
