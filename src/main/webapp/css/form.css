@@ -28,14 +28,14 @@ Examples:
 --------------------------------------------------------------*/
 
 /* TEXT */
-input[type="text"]{
+input[type="text"], input[type="password"]{
     border:1px solid #ccc;
-    padding:10px;
+    padding:3px 10px;
     margin:5px 15px;
     border-radius:5px;
 }
 
-input[type="text"][disabled] {
+input[type="text"][disabled], input[type="password"][disabled] {
 	background: rgba(191,185,169,.9);
 }
 
@@ -121,10 +121,10 @@ hr {
 
 /*--------------------------------------------------------------
 ERROR
-				<t:formField label="Name">
-					<form:input path="name"/>
-					<form:errors path="name" cssClass="error" ></form:errors>
-				</t:formField>
+<t:formField label="Name">
+	<form:input path="name"/>
+	<form:errors path="name" cssClass="error" ></form:errors>
+</t:formField>
 --------------------------------------------------------------*/
 .error {
 	color: red;
