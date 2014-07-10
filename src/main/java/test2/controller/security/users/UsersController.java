@@ -26,6 +26,7 @@ import test2.utils.controller.ControllerUtils;
 @RequestMapping(UsersController.URL)
 @SessionAttributes("principal")
 public class UsersController extends BaseController {
+	private static final String REFRESH_ACTION = "refreshAction";
 	private static final String DELETE_ACTION = "deleteAction";
 	private static final String ADD = "add";
 	private static final String ADD_ACTION = "addAction";
@@ -39,7 +40,7 @@ public class UsersController extends BaseController {
 	private UserService userService;
 
 	@RequestMapping(LIST)
-	public String main(ModelMap model) {
+	public String list(ModelMap model) {
 		ControllerUtils.onBeforeRender(model, bundles.getMessage("nav.users", new Object[] {}, Locale.getDefault()), URL);
 
 		List<User> users = userService.listUsers(null, null);
@@ -59,7 +60,16 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping(DELETE_ACTION)
-	public String deleteAction(@RequestParam(required = true) String id, ModelMap model) {
+	public String deleteAction(@RequestParam(required = true) String ids, ModelMap model) {
+		if (!StringUtils.isEmpty(ids)) {
+			String[] idList = ids.split(",");
+			userService.delete(idList);
+		}
+		return ControllerUtils.redirect(URL, LIST);
+	}
+
+	@RequestMapping(REFRESH_ACTION)
+	public String refreshAction(ModelMap model) {
 		return ControllerUtils.redirect(URL, LIST);
 	}
 

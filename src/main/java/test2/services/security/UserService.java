@@ -49,4 +49,18 @@ public class UserService {
 		sessionFactory.getCurrentSession().save(user);
 	}
 
+	@Transactional
+	public void delete(String id) {
+		User user = new User();
+		user.setId(id);
+		sessionFactory.getCurrentSession().delete(user);
+	}
+
+	@Transactional
+	public void delete(String[] ids) {
+		for (String id : ids) {
+			delete(id);
+		}
+	}
+
 }

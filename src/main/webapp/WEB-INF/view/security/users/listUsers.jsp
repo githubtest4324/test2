@@ -18,18 +18,21 @@
 		</form:form>
 	</t:formBox>
 	<t:row justify="<%=FlexJustify.START %>">
+		<form:form action="refreshAction" method="POST">
+			<input type="submit" value="Refresh" />
+		</form:form>
 		<form:form action="addAction" method="POST">
 			<input type="submit" value="Add user" />
 		</form:form>
 		<form:form action="deleteAction" method="POST">
-			<input id='fsafl' type="hidden" name='id'/>
-			<input type="submit" value="Delete user" onclick='document.getElementById("fsafl").value = getSelectedRecords("xx232l"); this.parentNode.submit();'/>
+			<input id='fsafl' type="hidden" name='ids'/>
+			<input type="submit" value="Delete user" onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
 		</form:form>
 	</t:row>
 	
 	<!-- 	CONTENT -->
 	<t:formBox>
-		<t:table entities="${users}"></t:table>
+		<t:table entities="${users}" tableId="t1"></t:table>
 	</t:formBox>
 </t:column>
 

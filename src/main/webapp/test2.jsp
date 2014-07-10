@@ -38,7 +38,8 @@
 
 		</tbody>
 	</table>
-	<a href="#" onclick="alert(getSelectedRecords('xx'));">aaa</a>
+	<a href="#" onclick="alert(getSelectedRecords('xx'));">show selected</a>
+	<a href="#" onclick="setSelectedRecords('xx', 'id1,id3');">Initial selection</a>
 </div>
 
 

@@ -5,9 +5,11 @@
 </%import>
 <%args>
 	List<Serializable> entities;
+	String tableId;
+	String selectedIds;
 </%args>
 
-<table id='xx232l' style='width: 100%;' class='smartTableUnselectable'>
+<table id='<% tableId %>' style='width: 100%;' class='smartTableUnselectable'>
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -24,4 +26,8 @@
 		</%for>
 	</tbody>
 </table>
+<script type="text/javascript">
+	setSelectedRecords('<% tableId %>', '<% selectedIds %>');
+</script>
+
 		

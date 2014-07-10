@@ -28,30 +28,51 @@ function getSelectedRecords(smtTableId){
 }
 
 
+function setSelectedRecords(smtTableId, idsStr){
+	smtTable = document.getElementById(smtTableId);
+	tbody = smtTable.getElementsByTagName('tbody')[0];
+	initializeSmartTable(tbody);
+
+	ids = idsStr.split(',');
+	
+	trs = tbody.trs2;
+	for(var i = 0; i<trs.length; i++){
+		smtId = trs[i].getAttribute('smtId');
+		if(ids.indexOf(smtId)>-1){
+	        toggleRow(trs[i], tbody.lastSelectedRow2);
+		}
+	}
+}
+
 function rowClick(currenttr, lock) {
-    if(currenttr.parentNode.trs2==null){
-    	currenttr.parentNode.trs2 = currenttr.parentNode.parentNode.tBodies[0].getElementsByTagName('tr');
-    	currenttr.parentNode.lastSelectedRow2 = new Object();
-    	currenttr.parentNode.lastSelectedRow2.value = null;
-    }
+	tbody = currenttr.parentNode;
+	initializeSmartTable(tbody);
 	if (window.event.ctrlKey) {
-        toggleRow(currenttr, currenttr.parentNode.lastSelectedRow2);
+        toggleRow(currenttr, tbody.lastSelectedRow2);
     }
     
     if (window.event.button === 0) {
         if (!window.event.ctrlKey && !window.event.shiftKey) {
-            clearAll(currenttr.parentNode.trs2);
-            toggleRow(currenttr, currenttr.parentNode.lastSelectedRow2);
+            clearAll(tbody.trs2);
+            toggleRow(currenttr, tbody.lastSelectedRow2);
         }
     
         if (window.event.shiftKey) {
-            selectRowsBetweenIndexes([currenttr.parentNode.lastSelectedRow2.value.rowIndex, currenttr.rowIndex], currenttr.parentNode.trs2);
+            selectRowsBetweenIndexes([tbody.lastSelectedRow2.value.rowIndex, currenttr.rowIndex], tbody.trs2);
         }
     }
 }
 
 
 //PRIVATE METHODS
+function initializeSmartTable(tbody){
+    if(tbody.trs2==null){
+    	tbody.trs2 = tbody.getElementsByTagName('tr');
+    	tbody.lastSelectedRow2 = new Object();
+    	tbody.lastSelectedRow2.value = null;
+    }
+}
+
 function toggleRow(row, lastSelectedRow2) {
     row.className = row.className == 'smartTablSeselected' ? '' : 'smartTablSeselected';
     lastSelectedRow2.value = row;
