@@ -34,7 +34,7 @@
 </t:column>
 
 
-
+<t:debugServletAttributes showRequestAttributes="true" showRequestParameters="true" showRequestHeaders="true"></t:debugServletAttributes>
 
 <!-- FOOTER -->
 <%@include file="/WEB-INF/view/pageTemplate/footer.jsp" %>

@@ -7,7 +7,7 @@
 	List<Serializable> entities;
 </%args>
 
-<table style='width: 100%;' class='smartTableUnselectable'>
+<table id='xx232l' style='width: 100%;' class='smartTableUnselectable'>
 	<thead>
 		<tr>
 			<th>Name</th>
@@ -17,7 +17,7 @@
 	<tbody>
 		<%for Serializable entity : entities %>
 			<%java User user = (User) entity; %>
-			<tr onmousedown="RowClick(this,false);">
+			<tr smtId='<% user.getId() %>' onmousedown="rowClick(this,false);">
 				<td><% user.getName() %></td>
 				<td><% user.getUsername() %></td>
 			</tr>

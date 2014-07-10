@@ -3,7 +3,32 @@
     pageEncoding="ISO-8859-1"%>
 */
 
-function RowClick(currenttr, lock) {
+// Conventions:
+// -each <tr> will have an attribute named smtId. This identify uniquely the row and is sent back to server.
+
+//PUBLIC METHODS
+function getSelectedRecords(smtTableId){
+	smtTable = document.getElementById(smtTableId);
+	trs = smtTable.getElementsByTagName('tbody')[0].trs2;
+	var res = '';
+	if(trs!=null){
+		for(var i = 0, k = 0; i<trs.length; i++){
+			if(trs[i].className=='smartTablSeselected'){
+				if(trs[i].getAttribute('smtId')!=null){
+					if(k!=0){
+						res = res+',';
+					}
+					res = res + trs[i].getAttribute('smtId');
+					k++;
+				}
+			}
+		}
+	}
+	return res;
+}
+
+
+function rowClick(currenttr, lock) {
     if(currenttr.parentNode.trs2==null){
     	currenttr.parentNode.trs2 = currenttr.parentNode.parentNode.tBodies[0].getElementsByTagName('tr');
     	currenttr.parentNode.lastSelectedRow2 = new Object();
@@ -25,6 +50,8 @@ function RowClick(currenttr, lock) {
     }
 }
 
+
+//PRIVATE METHODS
 function toggleRow(row, lastSelectedRow2) {
     row.className = row.className == 'smartTablSeselected' ? '' : 'smartTablSeselected';
     lastSelectedRow2.value = row;

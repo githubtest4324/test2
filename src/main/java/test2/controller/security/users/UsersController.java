@@ -2,6 +2,7 @@ package test2.controller.security.users;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -10,9 +11,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -25,6 +26,7 @@ import test2.utils.controller.ControllerUtils;
 @RequestMapping(UsersController.URL)
 @SessionAttributes("principal")
 public class UsersController extends BaseController {
+	private static final String DELETE_ACTION = "deleteAction";
 	private static final String ADD = "add";
 	private static final String ADD_ACTION = "addAction";
 	@SuppressWarnings("unused")
@@ -54,6 +56,11 @@ public class UsersController extends BaseController {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "security/users/addUser";
+	}
+
+	@RequestMapping(DELETE_ACTION)
+	public String deleteAction(@RequestParam(required = true) String id, ModelMap model) {
+		return ControllerUtils.redirect(URL, LIST);
 	}
 
 	@RequestMapping(value = ADD, params = { "add" })
@@ -90,7 +97,7 @@ public class UsersController extends BaseController {
 
 	@RequestMapping(value = ADD, params = { "cancel" })
 	public String cancelAdd(ModelMap model) {
-		return ControllerUtils.redirect(URL, LIST);
+		return "security/users/addUser";
 	}
 
 	@RequestMapping()

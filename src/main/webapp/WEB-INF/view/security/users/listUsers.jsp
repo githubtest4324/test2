@@ -21,6 +21,10 @@
 		<form:form action="addAction" method="POST">
 			<input type="submit" value="Add user" />
 		</form:form>
+		<form:form action="deleteAction" method="POST">
+			<input id='fsafl' type="hidden" name='id'/>
+			<input type="submit" value="Delete user" onclick='document.getElementById("fsafl").value = getSelectedRecords("xx232l"); this.parentNode.submit();'/>
+		</form:form>
 	</t:row>
 	
 	<!-- 	CONTENT -->
@@ -28,8 +32,6 @@
 		<t:table entities="${users}"></t:table>
 	</t:formBox>
 </t:column>
-
-
 
 <!-- FOOTER -->
 <%@include file="/WEB-INF/view/pageTemplate/footer.jsp" %>
