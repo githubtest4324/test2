@@ -2,7 +2,7 @@ package test2.controller.security.users;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import test2.model.User;
+import test2.services.security.UserPrincipal;
 import test2.services.security.UserService;
+import test2.services.security.UserService.CannotDeleteOwnUser;
 import test2.utils.controller.BaseController;
 import test2.utils.controller.ControllerUtils;
 
@@ -59,11 +62,37 @@ public class UsersController extends BaseController {
 		return "security/users/addUser";
 	}
 
-	@RequestMapping(DELETE_ACTION)
-	public String deleteAction(@RequestParam(required = true) String ids, ModelMap model) {
+	@RequestMapping(value = DELETE_ACTION, params = { "confirmation" })
+	public String deleteConfirmationAction(@RequestParam(required = true) String ids, ModelMap model) {
 		if (!StringUtils.isEmpty(ids)) {
 			String[] idList = ids.split(",");
-			userService.delete(idList);
+			StringBuilder userNames = new StringBuilder();
+			for (String id : idList) {
+				if (userNames.length() > 0) {
+					userNames.append(", ");
+				}
+				User user = userService.getById(id);
+				userNames.append(user.getName());
+			}
+			model.addAttribute("userNames", userNames);
+			model.addAttribute("userIds", ids);
+			model.addAttribute("deleteUserValidation", true);
+		}
+		return list(model);
+	}
+
+	@RequestMapping(value = DELETE_ACTION, params = { "delete" })
+	public String deleteAction(ModelMap model, @ModelAttribute("principal") UserPrincipal principal,
+			@RequestParam(required = true) String ids) {
+		if (!StringUtils.isEmpty(ids)) {
+			String[] idList = ids.split(",");
+			try {
+				userService.delete(idList, principal);
+			} catch (CannotDeleteOwnUser e) {
+				model.addAttribute("error",
+						this.bundles.getMessage("users.error.cannotDeleteOwnUser", new Object[] {}, Locale.getDefault()));
+				return list(model);
+			}
 		}
 		return ControllerUtils.redirect(URL, LIST);
 	}

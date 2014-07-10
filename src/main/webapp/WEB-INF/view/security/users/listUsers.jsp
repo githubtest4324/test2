@@ -26,15 +26,36 @@
 		</form:form>
 		<form:form action="deleteAction" method="POST">
 			<input id='fsafl' type="hidden" name='ids'/>
-			<input type="submit" value="Delete user" onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
+			<input type="submit" value="Delete user" name='confirmation' onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
 		</form:form>
 	</t:row>
 	
-	<!-- 	CONTENT -->
+	<!-- 	VALIDATION -->
+	<c:if test="${deleteUserValidation==true }">
+		<div style='margin-left: auto; margin-right: auto'>
+			<t:formBox>
+				<span class='warning'>Are you sure you want to delete ${userNames }?</span>
+				<t:row justify="<%=FlexJustify.CENTER %>">
+					<form:form action="deleteAction" method="POST">
+						<input type="hidden" name='ids' value='${userIds }'/>
+						<input type="submit" value="Delete" name='delete' />
+					</form:form>
+					<form:form action="refreshAction" method="POST">
+						<input type="submit" value="Cancel"/>
+					</form:form>
+				</t:row>
+			</t:formBox>
+		</div>
+	</c:if>
+	<span class="error">${error }</span>
+		
+	<!-- 	TABLE -->
 	<t:formBox>
 		<t:table entities="${users}" tableId="t1"></t:table>
 	</t:formBox>
 </t:column>
+
+<t:debugServletAttributes showRequestAttributes="true" showRequestParameters="true" showSessionAttributes="true"></t:debugServletAttributes>
 
 <!-- FOOTER -->
 <%@include file="/WEB-INF/view/pageTemplate/footer.jsp" %>

@@ -16,6 +16,7 @@ import test2.controller.HomeController;
 import test2.model.User;
 import test2.services.security.LoginService;
 import test2.services.security.UserPrincipal;
+import test2.services.security.UserService;
 import test2.utils.controller.BaseController;
 import test2.utils.controller.ControllerUtils;
 
@@ -32,12 +33,16 @@ public class LoginController extends BaseController {
 	@Autowired
 	private LoginService loginService;
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping(PERFORM_LOGIN)
 	public String login(ModelMap model, @ModelAttribute("user") User user, BindingResult result) {
 		logger.info(String.format("Login using user: %s, pass: %s", user.getUsername(), user.getPassword()));
 		if (loginService.isValidLogin(user.getUsername(), user.getPassword())) {
 			logger.info("Login successfull");
-			model.addAttribute("principal", new UserPrincipal(user.getUsername()));
+			User realUser = userService.getByUsername(user.getUsername());
+			model.addAttribute("principal", new UserPrincipal(realUser));
 			return ControllerUtils.redirect(HomeController.URL, HomeController.MAIN);
 		} else {
 			// model.addAttribute("outcome", false);

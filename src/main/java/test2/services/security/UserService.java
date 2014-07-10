@@ -2,6 +2,7 @@ package test2.services.security;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -35,13 +36,20 @@ public class UserService {
 		return crit.list();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<User> getUser(String id) {
+	public User getById(String id) {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
 		crit.add(Restrictions.eq(User.ID, id));
 
-		return (List<User>) CriteriaUtils.findSingleResult(crit);
+		return (User) CriteriaUtils.findSingleResult(crit);
+	}
+
+	@Transactional
+	public User getByUsername(String username) {
+		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
+		crit.add(Restrictions.eq(User.USERNAME, username));
+
+		return (User) CriteriaUtils.findSingleResult(crit);
 	}
 
 	@Transactional
@@ -49,17 +57,23 @@ public class UserService {
 		sessionFactory.getCurrentSession().save(user);
 	}
 
-	@Transactional
-	public void delete(String id) {
-		User user = new User();
-		user.setId(id);
-		sessionFactory.getCurrentSession().delete(user);
+	public static class CannotDeleteOwnUser extends Exception {
 	}
 
 	@Transactional
-	public void delete(String[] ids) {
+	public void delete(String id, UserPrincipal principal) throws CannotDeleteOwnUser {
+		if (StringUtils.equals(id, principal.getUser().getId())) {
+			throw new CannotDeleteOwnUser();
+		}
+		User user = new User();
+		user.setId(id);
+		// sessionFactory.getCurrentSession().delete(user);
+	}
+
+	@Transactional
+	public void delete(String[] ids, UserPrincipal principal) throws CannotDeleteOwnUser {
 		for (String id : ids) {
-			delete(id);
+			delete(id, principal);
 		}
 	}
 

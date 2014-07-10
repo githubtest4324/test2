@@ -1,6 +1,7 @@
 package test2.controller;
 
 import java.util.Locale;
+import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import test2.model.User;
 import test2.services.security.UserPrincipal;
 import test2.utils.controller.BaseController;
 import test2.utils.controller.ControllerUtils;
@@ -26,14 +28,6 @@ public class HomeController extends BaseController {
 	private final static Logger logger = Logger.getLogger(HomeController.class.getName());
 	public final static String URL = "/home";
 	public final static String MAIN = "main";
-
-	/**
-	 * Called only if principal is not defined at session level.
-	 */
-	@ModelAttribute("principal")
-	public UserPrincipal instantiateEmptyUser() {
-		return new UserPrincipal("guest");
-	}
 
 	@RequestMapping(MAIN)
 	public String main(ModelMap model, @ModelAttribute("principal") @Validated UserPrincipal principal, BindingResult result) {
