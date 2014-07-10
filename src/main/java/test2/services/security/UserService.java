@@ -18,6 +18,9 @@ public class UserService {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@Autowired
+	private SecurityService securityService;
+
 	void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
@@ -58,16 +61,18 @@ public class UserService {
 	}
 
 	public static class CannotDeleteOwnUser extends Exception {
+		private static final long serialVersionUID = 1L;
 	}
 
 	@Transactional
 	public void delete(String id, UserPrincipal principal) throws CannotDeleteOwnUser {
+		securityService.allowed(principal.getUser().getUsername(), "admin");
 		if (StringUtils.equals(id, principal.getUser().getId())) {
 			throw new CannotDeleteOwnUser();
 		}
 		User user = new User();
 		user.setId(id);
-		// sessionFactory.getCurrentSession().delete(user);
+		sessionFactory.getCurrentSession().delete(user);
 	}
 
 	@Transactional

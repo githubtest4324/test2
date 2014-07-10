@@ -26,9 +26,7 @@
 					<c:otherwise>
 						<li><a href="#"><spring:message code="nav.security" /></a>
 							<ul>
-								<t:allowed roles="admin">
-										<li><a href="${root}/security/users"><spring:message code="nav.users"/></a></li>
-								</t:allowed>
+								<li><a href="${root}/security/users"><spring:message code="nav.users"/></a></li>
 								<li><a href="${root}/login/logout"><spring:message code="nav.logout"/></a></li>
 							</ul>
 						</li>

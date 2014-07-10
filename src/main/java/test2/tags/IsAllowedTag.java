@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import test2.services.security.SecurityService;
+import test2.services.security.SecurityService.AccessDeniedException;
 import test2.services.security.UserPrincipal;
 
 /**
@@ -53,8 +54,12 @@ public class IsAllowedTag extends SimpleTagSupport {
 			String[] rolesArray = roles.split(",");
 			boolean hasRole = false;
 			for (String role : rolesArray) {
-				if (securityService.hasRole(principal.getName(), role.trim())) {
+				try {
+					securityService.allowed(principal.getName(), role.trim());
 					hasRole = true;
+				} catch (AccessDeniedException e) {
+					hasRole = false;
+
 				}
 			}
 

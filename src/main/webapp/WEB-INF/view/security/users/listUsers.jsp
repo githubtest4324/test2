@@ -17,17 +17,21 @@
 			<t:formField label="Username"><form:input path="username"/></t:formField>
 		</form:form>
 	</t:formBox>
+
+	<!-- 	ACTIONS -->
 	<t:row justify="<%=FlexJustify.START %>">
 		<form:form action="refreshAction" method="POST">
 			<input type="submit" value="Refresh" />
 		</form:form>
-		<form:form action="addAction" method="POST">
-			<input type="submit" value="Add user" />
-		</form:form>
-		<form:form action="deleteAction" method="POST">
-			<input id='fsafl' type="hidden" name='ids'/>
-			<input type="submit" value="Delete user" name='confirmation' onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
-		</form:form>
+		<t:allowed roles="admin">
+			<form:form action="addAction" method="POST">
+				<input type="submit" value="Add user" />
+			</form:form>
+			<form:form action="deleteAction" method="POST">
+				<input id='fsafl' type="hidden" name='ids'/>
+				<input type="submit" value="Delete user" name='confirmation' onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
+			</form:form>
+		</t:allowed>
 	</t:row>
 	
 	<!-- 	VALIDATION -->

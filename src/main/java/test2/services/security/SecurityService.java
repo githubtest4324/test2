@@ -17,20 +17,31 @@ public class SecurityService {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	public static class AccessDeniedException extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+
+		public AccessDeniedException(String message) {
+			super(message);
+		}
+	}
+
 	/**
-	 * Returns true if current user is part of role.
+	 * Tells whether username is allowed to perform actions as roleName.
+	 * 
+	 * @throws AccessDeniedException
+	 *             If user is not allowed.
 	 */
 	@Transactional
-	public boolean hasRole(String username, String roleName) {
+	public void allowed(String username, String roleName) {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
 		crit.createCriteria(User.ROLES).add(Restrictions.eq(Role.NAME, roleName));
 		crit.add(Restrictions.eq(User.USERNAME, username));
 		@SuppressWarnings("unchecked")
 		List<User> list = crit.list();
 		if (list.size() == 1) {
-			return true;
+			return;
 		} else {
-			return false;
+			throw new AccessDeniedException(String.format("User %s cannot acces functionality in role %s.", username, roleName));
 		}
 
 	}
