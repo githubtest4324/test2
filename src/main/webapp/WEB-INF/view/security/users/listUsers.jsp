@@ -20,14 +20,14 @@
 
 	<!-- 	ACTIONS -->
 	<t:row justify="<%=FlexJustify.START %>">
-		<form:form action="refreshAction" method="POST">
+		<form:form action="refresh" method="POST">
 			<input type="submit" value="Refresh" />
 		</form:form>
 		<t:allowed roles="admin">
-			<form:form action="addAction" method="POST">
+			<form:form action="goToAdd" method="POST">
 				<input type="submit" value="Add user" />
 			</form:form>
-			<form:form action="deleteAction" method="POST">
+			<form:form action="delete" method="POST">
 				<input id='fsafl' type="hidden" name='ids'/>
 				<input type="submit" value="Delete user" name='confirmation' onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
 			</form:form>
@@ -40,11 +40,11 @@
 			<t:formBox>
 				<span class='warning'>Are you sure you want to delete ${userNames }?</span>
 				<t:row justify="<%=FlexJustify.CENTER %>">
-					<form:form action="deleteAction" method="POST">
+					<form:form action="delete" method="POST">
 						<input type="hidden" name='ids' value='${userIds }'/>
 						<input type="submit" value="Delete" name='delete' />
 					</form:form>
-					<form:form action="refreshAction" method="POST">
+					<form:form action="refresh" method="POST">
 						<input type="submit" value="Cancel"/>
 					</form:form>
 				</t:row>

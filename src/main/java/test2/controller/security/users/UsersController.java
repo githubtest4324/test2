@@ -2,8 +2,6 @@ package test2.controller.security.users;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.ResourceBundle.Control;
-import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -12,7 +10,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,10 +27,10 @@ import test2.utils.controller.ControllerUtils;
 @RequestMapping(UsersController.URL)
 @SessionAttributes("principal")
 public class UsersController extends BaseController {
-	private static final String REFRESH_ACTION = "refreshAction";
-	private static final String DELETE_ACTION = "deleteAction";
+	private static final String REFRESH = "refresh";
+	private static final String DELETE = "delete";
 	private static final String ADD = "add";
-	private static final String ADD_ACTION = "addAction";
+	private static final String GO_TO_ADD = "goToAdd";
 	@SuppressWarnings("unused")
 	private final static Logger logger = Logger.getLogger(UsersController.class.getName());
 	public final static String URL = "/security/users";
@@ -56,14 +53,14 @@ public class UsersController extends BaseController {
 		return "security/users/listUsers";
 	}
 
-	@RequestMapping(ADD_ACTION)
+	@RequestMapping(GO_TO_ADD)
 	public String addAction(ModelMap model) {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "security/users/addUser";
 	}
 
-	@RequestMapping(value = DELETE_ACTION, params = { "confirmation" })
+	@RequestMapping(value = DELETE, params = { "confirmation" })
 	public String deleteConfirmationAction(@RequestParam(required = true) String ids, ModelMap model) {
 		if (!StringUtils.isEmpty(ids)) {
 			String[] idList = ids.split(",");
@@ -82,7 +79,7 @@ public class UsersController extends BaseController {
 		return list(model);
 	}
 
-	@RequestMapping(value = DELETE_ACTION, params = { "delete" })
+	@RequestMapping(value = DELETE, params = { "delete" })
 	public String deleteAction(ModelMap model, @ModelAttribute("principal") UserPrincipal principal,
 			@RequestParam(required = true) String ids) {
 		if (!StringUtils.isEmpty(ids)) {
@@ -98,7 +95,7 @@ public class UsersController extends BaseController {
 		return ControllerUtils.redirect(URL, LIST);
 	}
 
-	@RequestMapping(REFRESH_ACTION)
+	@RequestMapping(REFRESH)
 	public String refreshAction(ModelMap model) {
 		return ControllerUtils.redirect(URL, LIST);
 	}
