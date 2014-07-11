@@ -138,7 +138,7 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping()
-	public String logout(SessionStatus session) {
+	public String users() {
 		return ControllerUtils.redirect(URL, LIST);
 	}
 
