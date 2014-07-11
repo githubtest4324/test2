@@ -2,6 +2,7 @@ package test2.controller.security.users;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.ResourceBundle.Control;
 import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
@@ -136,7 +137,7 @@ public class UsersController extends BaseController {
 
 	@RequestMapping(value = ADD, params = { "cancel" })
 	public String cancelAdd(ModelMap model) {
-		return "security/users/addUser";
+		return ControllerUtils.redirect(URL, LIST);
 	}
 
 	@RequestMapping()
