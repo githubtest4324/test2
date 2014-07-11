@@ -75,6 +75,7 @@ public class UserService {
 		sessionFactory.getCurrentSession().delete(user);
 	}
 
+	// TODO: seems it starts a new transaction even if multiple users are deleted. Example: delete multiple users and one of them is the current users. Some will be deleted, until it gets to the current user.
 	@Transactional
 	public void delete(String[] ids, UserPrincipal principal) throws CannotDeleteOwnUser {
 		for (String id : ids) {

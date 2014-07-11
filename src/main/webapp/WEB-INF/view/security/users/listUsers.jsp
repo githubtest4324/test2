@@ -10,53 +10,45 @@
 <!-- CONTENT -->
 
 <t:column>
-	<!-- CRITERIA -->
-	<t:formBox>
-		<form:form action="list" method="POST" commandName="criteria">
+	<form:form method="POST" commandName="criteria">
+		<!-- CRITERIA -->
+		<t:formBox>
 			<t:formField label="Name"><form:input path="name"/></t:formField>
 			<t:formField label="Username"><form:input path="username"/></t:formField>
-		</form:form>
-	</t:formBox>
+		</t:formBox>
 
-	<!-- 	ACTIONS -->
-	<t:row justify="<%=FlexJustify.START %>">
-		<form:form action="refresh" method="POST">
-			<input type="submit" value="Refresh" />
-		</form:form>
-		<t:allowed roles="admin">
-			<form:form action="goToAdd" method="POST">
-				<input type="submit" value="Add user" />
-			</form:form>
-			<form:form action="delete" method="POST">
-				<input id='fsafl' type="hidden" name='ids'/>
-				<input type="submit" value="Delete user" name='confirmation' onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
-			</form:form>
-		</t:allowed>
-	</t:row>
+		<!-- 	ACTIONS -->
+		<t:row justify="<%=FlexJustify.START %>">
+			<input type="submit" name='refresh' value="Refresh" />
+			<t:allowed roles="admin">				
+				<input type="submit" name="goToAdd" value="Add user" />
+
+				<input id='fsafl'  name='confirmDeleteUserIds' type="hidden"/>
+				<input type="submit" value="Delete user" name='deleteConfirmation' onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
+			</t:allowed>
+		</t:row>
+
 	
-	<!-- 	VALIDATION -->
-	<c:if test="${deleteUserValidation==true }">
-		<div style='margin-left: auto; margin-right: auto'>
-			<t:formBox>
-				<span class='warning'>Are you sure you want to delete ${userNames }?</span>
-				<t:row justify="<%=FlexJustify.CENTER %>">
-					<form:form action="delete" method="POST">
-						<input type="hidden" name='ids' value='${userIds }'/>
-						<input type="submit" value="Delete" name='delete' />
-					</form:form>
-					<form:form action="refresh" method="POST">
-						<input type="submit" value="Cancel"/>
-					</form:form>
-				</t:row>
-			</t:formBox>
-		</div>
-	</c:if>
-	<span class="error">${error }</span>
+		<!-- 	VALIDATE DELETION -->
+		<c:if test="${deleteUserValidation==true }">
+			<div style='margin-left: auto; margin-right: auto'>
+				<t:formBox>
+					<span class='warning'>Are you sure you want to delete ${userNames }?</span>
+					<t:row justify="<%=FlexJustify.CENTER %>">
+						<input type="hidden" name='deleteUserIds' value='${userIds }'/>
+						<input type="submit" name='delete' value="Delete" />
+						<input type="submit" name='refresh' value="Cancel"/>
+					</t:row>
+				</t:formBox>
+			</div>
+		</c:if>
+		<span class="error">${error }</span>
 		
-	<!-- 	TABLE -->
-	<t:formBox>
-		<t:table entities="${users}" tableId="t1"></t:table>
-	</t:formBox>
+		<!-- 	TABLE -->
+		<t:formBox>
+			<t:table entities="${users}" tableId="t1"></t:table>
+		</t:formBox>
+	</form:form>
 </t:column>
 
 <t:debugServletAttributes showRequestAttributes="true" showRequestParameters="true" showSessionAttributes="true"></t:debugServletAttributes>

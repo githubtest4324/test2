@@ -11,7 +11,7 @@
 <t:column>
 	<!-- CRITERIA -->
 	<t:formBox>
-		<form:form action="add" method="POST" commandName="user">
+		<form:form method="POST" commandName="user">
 			<t:formSection>
 				<t:formField label="Name">
 					<form:input path="name"/>
@@ -28,7 +28,7 @@
 				<t:formField label="Retype password"><form:password path="computed.retypePassword"/></t:formField>
 			</t:formSection>
 			<input type="submit" value="Add" name="add"/>
-			<input type="submit" value="Cancel" name="cancel"/>
+			<input type="submit" value="Cancel" name="cancelAdd"/>
 		</form:form>
 	</t:formBox>
 </t:column>

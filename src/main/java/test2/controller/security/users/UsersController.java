@@ -3,6 +3,8 @@ package test2.controller.security.users;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ import test2.utils.controller.ControllerUtils;
 @RequestMapping(UsersController.URL)
 @SessionAttributes("principal")
 public class UsersController extends BaseController {
+	private static final String CANCEL_ADD = "cancelAdd";
+	private static final String DELETE_CONFIRMATION = "deleteConfirmation";
 	private static final String REFRESH = "refresh";
 	private static final String DELETE = "delete";
 	private static final String ADD = "add";
@@ -35,12 +39,12 @@ public class UsersController extends BaseController {
 	private final static Logger logger = Logger.getLogger(UsersController.class.getName());
 	public final static String URL = "/security/users";
 	// public final static String MAIN = "main";
-	public final static String LIST = "list";
+	// public final static String LIST = "list";
 
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(LIST)
+	@RequestMapping()
 	public String list(ModelMap model) {
 		ControllerUtils.onBeforeRender(model, bundles.getMessage("nav.users", new Object[] {}, Locale.getDefault()), URL);
 
@@ -53,17 +57,10 @@ public class UsersController extends BaseController {
 		return "security/users/listUsers";
 	}
 
-	@RequestMapping(GO_TO_ADD)
-	public String addAction(ModelMap model) {
-		User user = new User();
-		model.addAttribute("user", user);
-		return "security/users/addUser";
-	}
-
-	@RequestMapping(value = DELETE, params = { "confirmation" })
-	public String deleteConfirmationAction(@RequestParam(required = true) String ids, ModelMap model) {
-		if (!StringUtils.isEmpty(ids)) {
-			String[] idList = ids.split(",");
+	@RequestMapping(params = { DELETE_CONFIRMATION })
+	public String deleteConfirmationAction(@RequestParam(required = true) String confirmDeleteUserIds, ModelMap model) {
+		if (!StringUtils.isEmpty(confirmDeleteUserIds)) {
+			String[] idList = confirmDeleteUserIds.split(",");
 			StringBuilder userNames = new StringBuilder();
 			for (String id : idList) {
 				if (userNames.length() > 0) {
@@ -73,17 +70,17 @@ public class UsersController extends BaseController {
 				userNames.append(user.getName());
 			}
 			model.addAttribute("userNames", userNames);
-			model.addAttribute("userIds", ids);
+			model.addAttribute("userIds", confirmDeleteUserIds);
 			model.addAttribute("deleteUserValidation", true);
 		}
 		return list(model);
 	}
 
-	@RequestMapping(value = DELETE, params = { "delete" })
-	public String deleteAction(ModelMap model, @ModelAttribute("principal") UserPrincipal principal,
-			@RequestParam(required = true) String ids) {
-		if (!StringUtils.isEmpty(ids)) {
-			String[] idList = ids.split(",");
+	@RequestMapping(params = { DELETE })
+	public String delete(ModelMap model, @ModelAttribute("principal") UserPrincipal principal,
+			@RequestParam(required = true) String deleteUserIds) {
+		if (!StringUtils.isEmpty(deleteUserIds)) {
+			String[] idList = deleteUserIds.split(",");
 			try {
 				userService.delete(idList, principal);
 			} catch (CannotDeleteOwnUser e) {
@@ -92,15 +89,22 @@ public class UsersController extends BaseController {
 				return list(model);
 			}
 		}
-		return ControllerUtils.redirect(URL, LIST);
+		return ControllerUtils.redirect(URL);
 	}
 
-	@RequestMapping(REFRESH)
+	@RequestMapping(params = { REFRESH })
 	public String refreshAction(ModelMap model) {
-		return ControllerUtils.redirect(URL, LIST);
+		return ControllerUtils.redirect(URL);
 	}
 
-	@RequestMapping(value = ADD, params = { "add" })
+	@RequestMapping(params = { GO_TO_ADD })
+	public String addAction(ModelMap model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		return "security/users/addUser";
+	}
+
+	@RequestMapping(params = { ADD })
 	public String add(ModelMap model, @ModelAttribute("user") User user, BindingResult result) {
 		// Validations
 		if (!StringUtils.equals(user.getPassword(), user.getComputed().getRetypePassword())) {
@@ -126,20 +130,15 @@ public class UsersController extends BaseController {
 		}
 
 		if (!result.hasErrors()) {
-			return ControllerUtils.redirect(URL, LIST);
+			return ControllerUtils.redirect(URL);
 		} else {
 			return "security/users/addUser";
 		}
 	}
 
-	@RequestMapping(value = ADD, params = { "cancel" })
+	@RequestMapping(params = { CANCEL_ADD })
 	public String cancelAdd(ModelMap model) {
-		return ControllerUtils.redirect(URL, LIST);
-	}
-
-	@RequestMapping()
-	public String users() {
-		return ControllerUtils.redirect(URL, LIST);
+		return ControllerUtils.redirect(URL);
 	}
 
 }
