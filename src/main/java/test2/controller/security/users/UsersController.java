@@ -3,8 +3,6 @@ package test2.controller.security.users;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import test2.model.User;
 import test2.services.security.UserPrincipal;
@@ -44,17 +41,24 @@ public class UsersController extends BaseController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping()
-	public String list(ModelMap model) {
+	@ModelAttribute("criteria")
+	public User criteria() {
+		return new User();
+	}
+
+	@RequestMapping() AICI AM RAMAS. SA FAC CRITERIA SA MEARGA.
+	public String list(ModelMap model, @ModelAttribute("criteria") User criteria, BindingResult result) {
 		ControllerUtils.onBeforeRender(model, bundles.getMessage("nav.users", new Object[] {}, Locale.getDefault()), URL);
 
 		List<User> users = userService.listUsers(null, null);
 		model.addAttribute("users", users);
 
-		User criteria = new User();
-		model.addAttribute("criteria", criteria);
-
 		return "security/users/listUsers";
+	}
+
+	@RequestMapping(params = { REFRESH })
+	public String refresh(ModelMap model) {
+		return ControllerUtils.redirect(URL);
 	}
 
 	@RequestMapping(params = { DELETE_CONFIRMATION })
@@ -89,11 +93,6 @@ public class UsersController extends BaseController {
 				return list(model);
 			}
 		}
-		return ControllerUtils.redirect(URL);
-	}
-
-	@RequestMapping(params = { REFRESH })
-	public String refreshAction(ModelMap model) {
 		return ControllerUtils.redirect(URL);
 	}
 
