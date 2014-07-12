@@ -13,7 +13,7 @@
 	<form:form method="POST" commandName="criteria">
 		<!-- CRITERIA -->
 		<t:formBox>
-			<t:formField label="Name"><form:input path="name"/></t:formField>
+			<t:formField label="Name"><form:input path="name" autofocus='autofocus'/></t:formField>
 			<t:formField label="Username"><form:input path="username"/></t:formField>
 		</t:formBox>
 

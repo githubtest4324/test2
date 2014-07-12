@@ -50,15 +50,15 @@ public class UsersController extends BaseController {
 	public String list(ModelMap model, @ModelAttribute("criteria") User criteria, BindingResult result) {
 		ControllerUtils.onBeforeRender(model, bundles.getMessage("nav.users", new Object[] {}, Locale.getDefault()), URL);
 
-		List<User> users = userService.listUsers(null, null);
+		List<User> users = userService.listUsers(criteria.getName(), criteria.getUsername());
 		model.addAttribute("users", users);
 
 		return "security/users/listUsers";
 	}
 
 	@RequestMapping(params = { REFRESH })
-	public String refresh(ModelMap model) {
-		return ControllerUtils.redirect(URL);
+	public String refresh(ModelMap model, @ModelAttribute("criteria") User criteria, BindingResult result) {
+		return list(model, criteria, result);
 	}
 
 	@RequestMapping(params = { DELETE_CONFIRMATION })

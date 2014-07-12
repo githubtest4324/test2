@@ -11,10 +11,10 @@
 <t:column>
 	<!-- CRITERIA -->
 	<t:formBox>
-		<form:form method="POST" commandName="user">
+		<form:form method="POST" commandName="user" autocomplete="off">
 			<t:formSection>
 				<t:formField label="Name">
-					<form:input path="name"/>
+					<form:input path="name" autofocus='autofocus'/>
 					<form:errors path="name" cssClass="error" ></form:errors>
 				</t:formField>
 				<t:formField label="Username">
@@ -25,7 +25,7 @@
 					<form:password path="password"/>
 					<form:errors path="password" cssClass="error" ></form:errors>
 				</t:formField>
-				<t:formField label="Retype password"><form:password path="computed.retypePassword"/></t:formField>
+				<t:formField label="Retype password"><form:password path="computed.retypePassword" autocomplete="off"/></t:formField>
 			</t:formSection>
 			<input type="submit" value="Add" name="add"/>
 			<input type="submit" value="Cancel" name="cancelAdd"/>

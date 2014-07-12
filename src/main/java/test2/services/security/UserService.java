@@ -27,13 +27,13 @@ public class UserService {
 
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<User> listUsers(String critName, String critUsername) {
+	public List<User> listUsers(String name, String username) {
 		Criteria crit = sessionFactory.getCurrentSession().createCriteria(User.class);
-		if (critName != null) {
-			crit.add(Restrictions.like(User.NAME, "%" + critName + "%"));
+		if (!StringUtils.isEmpty(name)) {
+			crit.add(Restrictions.like(User.NAME, "%" + name + "%"));
 		}
-		if (critUsername != null) {
-			crit.add(Restrictions.like(User.USERNAME, "%" + critUsername + "%"));
+		if (!StringUtils.isEmpty(username)) {
+			crit.add(Restrictions.like(User.USERNAME, "%" + username + "%"));
 		}
 
 		return crit.list();
