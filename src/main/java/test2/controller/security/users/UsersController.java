@@ -46,7 +46,7 @@ public class UsersController extends BaseController {
 		return new User();
 	}
 
-	@RequestMapping() AICI AM RAMAS. SA FAC CRITERIA SA MEARGA.
+	@RequestMapping()
 	public String list(ModelMap model, @ModelAttribute("criteria") User criteria, BindingResult result) {
 		ControllerUtils.onBeforeRender(model, bundles.getMessage("nav.users", new Object[] {}, Locale.getDefault()), URL);
 
@@ -62,7 +62,8 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping(params = { DELETE_CONFIRMATION })
-	public String deleteConfirmationAction(@RequestParam(required = true) String confirmDeleteUserIds, ModelMap model) {
+	public String deleteConfirmationAction(@RequestParam(required = true) String confirmDeleteUserIds, ModelMap model,
+			@ModelAttribute("criteria") User criteria, BindingResult result) {
 		if (!StringUtils.isEmpty(confirmDeleteUserIds)) {
 			String[] idList = confirmDeleteUserIds.split(",");
 			StringBuilder userNames = new StringBuilder();
@@ -77,12 +78,12 @@ public class UsersController extends BaseController {
 			model.addAttribute("userIds", confirmDeleteUserIds);
 			model.addAttribute("deleteUserValidation", true);
 		}
-		return list(model);
+		return list(model, criteria, result);
 	}
 
 	@RequestMapping(params = { DELETE })
 	public String delete(ModelMap model, @ModelAttribute("principal") UserPrincipal principal,
-			@RequestParam(required = true) String deleteUserIds) {
+			@RequestParam(required = true) String deleteUserIds, @ModelAttribute("criteria") User criteria, BindingResult result) {
 		if (!StringUtils.isEmpty(deleteUserIds)) {
 			String[] idList = deleteUserIds.split(",");
 			try {
@@ -90,7 +91,7 @@ public class UsersController extends BaseController {
 			} catch (CannotDeleteOwnUser e) {
 				model.addAttribute("error",
 						this.bundles.getMessage("users.error.cannotDeleteOwnUser", new Object[] {}, Locale.getDefault()));
-				return list(model);
+				return list(model, criteria, result);
 			}
 		}
 		return ControllerUtils.redirect(URL);
