@@ -94,7 +94,7 @@ public class UsersController extends BaseController {
 				return list(model, criteria, result);
 			}
 		}
-		return ControllerUtils.redirect(URL);
+		return list(model, criteria, result);
 	}
 
 	@RequestMapping(params = { GO_TO_ADD })
