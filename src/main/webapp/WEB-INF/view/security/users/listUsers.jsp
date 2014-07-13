@@ -28,10 +28,15 @@
 
 				<input id='fsafl'  name='confirmDeleteUserIds' type="hidden"/>
 				<input type="submit" name='deleteConfirmation' value="Delete" onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
+				<c:if test="${multipleSelectionForbidden==true}">
+					<span class='warning'><spring:message message="multipleSelectionForbidden"/></span>
+				</c:if>
+				<c:if test="${noSelectionForbidden==true}">
+					<span class='warning'><spring:message message="noSelectionForbidden"/></span>
+				</c:if>
 			</t:allowed>
 		</t:row>
-
-	
+ 	
 		<!-- 	VALIDATE DELETION -->
 		<c:if test="${deleteUserValidation==true }">
 			<div style='margin-left: auto; margin-right: auto'>

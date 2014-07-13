@@ -156,7 +156,7 @@ public class UsersController extends BaseController {
 			}
 		} else {
 			model.addAttribute("noSelectionForbidden", true);
-			return list(model, criteria, result); AICI AM RAMAS
+			return list(model, criteria, result);
 		}
 	}
 }
