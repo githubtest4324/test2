@@ -142,18 +142,21 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping(params = { "goToEdit" })
-	public String goToEdit(ModelMap model, @RequestParam(required = true) String editUserIds) {
+	public String goToEdit(ModelMap model, @RequestParam(required = true) String editUserIds,
+			@ModelAttribute("criteria") User criteria, BindingResult result) {
 		if (!StringUtils.isEmpty(editUserIds)) {
 			String[] idList = editUserIds.split(",");
 			if (idList.length > 1) {
 				model.addAttribute("multipleSelectionForbidden", true);
+				return list(model, criteria, result);
 			} else {
 				User user = userService.getById(idList[0]);
 				model.addAttribute("user", user);
-				return "security/users/addUser";
+				return "security/users/editUser";
 			}
+		} else {
+			model.addAttribute("noSelectionForbidden", true);
+			return list(model, criteria, result); AICI AM RAMAS
 		}
-		return list(model, criteria, result);
 	}
-
 }
