@@ -23,8 +23,11 @@
 			<t:allowed roles="admin">				
 				<input type="submit" name="goToAdd" value="Add user" />
 
+				<input id='fi34'  name='editUserIds' type="hidden"/>
+				<input type="submit" name='goToEdit' value="Edit" onclick='document.getElementById("fi34").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
+
 				<input id='fsafl'  name='confirmDeleteUserIds' type="hidden"/>
-				<input type="submit" value="Delete user" name='deleteConfirmation' onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
+				<input type="submit" name='deleteConfirmation' value="Delete" onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
 			</t:allowed>
 		</t:row>
 

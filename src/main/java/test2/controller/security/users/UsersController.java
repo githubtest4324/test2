@@ -98,7 +98,7 @@ public class UsersController extends BaseController {
 	}
 
 	@RequestMapping(params = { GO_TO_ADD })
-	public String addAction(ModelMap model) {
+	public String goToAdd(ModelMap model) {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "security/users/addUser";
@@ -139,6 +139,21 @@ public class UsersController extends BaseController {
 	@RequestMapping(params = { CANCEL_ADD })
 	public String cancelAdd(ModelMap model) {
 		return ControllerUtils.redirect(URL);
+	}
+
+	@RequestMapping(params = { "goToEdit" })
+	public String goToEdit(ModelMap model, @RequestParam(required = true) String editUserIds) {
+		if (!StringUtils.isEmpty(editUserIds)) {
+			String[] idList = editUserIds.split(",");
+			if (idList.length > 1) {
+				model.addAttribute("multipleSelectionForbidden", true);
+			} else {
+				User user = userService.getById(idList[0]);
+				model.addAttribute("user", user);
+				return "security/users/addUser";
+			}
+		}
+		return list(model, criteria, result);
 	}
 
 }
