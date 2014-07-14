@@ -28,14 +28,16 @@
 
 				<input id='fsafl'  name='confirmDeleteUserIds' type="hidden"/>
 				<input type="submit" name='deleteConfirmation' value="Delete" onclick='document.getElementById("fsafl").value = getSelectedRecords("t1"); this.parentNode.submit();'/>
-				<c:if test="${multipleSelectionForbidden==true}">
-					<span class='warning'><spring:message message="multipleSelectionForbidden"/></span>
-				</c:if>
-				<c:if test="${noSelectionForbidden==true}">
-					<span class='warning'><spring:message message="noSelectionForbidden"/></span>
-				</c:if>
 			</t:allowed>
 		</t:row>
+		
+		<!-- ACTION WARNINGS/ERRORS -->
+		<c:if test="${multipleSelectionForbidden==true}">
+			<span style="display: block;" class='warning'><spring:message code="multipleSelectionForbidden"/></span>
+		</c:if>
+		<c:if test="${noSelectionForbidden==true}">
+			<span style="display: block;" class='warning'><spring:message code="noSelectionForbidden"/></span>
+		</c:if>
  	
 		<!-- 	VALIDATE DELETION -->
 		<c:if test="${deleteUserValidation==true }">
@@ -44,7 +46,7 @@
 					<span class='warning'>Are you sure you want to delete ${userNames }?</span>
 					<t:row justify="<%=FlexJustify.CENTER %>">
 						<input type="hidden" name='deleteUserIds' value='${userIds }'/>
-						<input type="submit" name='delete' value="Delete" />
+						<input type="submit" name='delete' value="Delete" autofocus="autofocus" />
 						<input type="submit" name='refresh' value="Cancel"/>
 					</t:row>
 				</t:formBox>

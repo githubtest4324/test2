@@ -83,4 +83,9 @@ public class UserService {
 		}
 	}
 
+	@Transactional
+	public void save(User user) {
+		sessionFactory.getCurrentSession().update(user);
+	}
+
 }

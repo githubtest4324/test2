@@ -24,8 +24,11 @@ import test2.utils.controller.ControllerUtils;
 
 @Controller
 @RequestMapping(UsersController.URL)
-@SessionAttributes("principal")
+@SessionAttributes(value = { "principal" })
 public class UsersController extends BaseController {
+	private static final String UPDATE = "update";
+	private static final String GO_TO_EDIT = "goToEdit";
+	private static final String CANCEL_EDIT = "cancelEdit";
 	private static final String CANCEL_ADD = "cancelAdd";
 	private static final String DELETE_CONFIRMATION = "deleteConfirmation";
 	private static final String REFRESH = "refresh";
@@ -141,7 +144,7 @@ public class UsersController extends BaseController {
 		return ControllerUtils.redirect(URL);
 	}
 
-	@RequestMapping(params = { "goToEdit" })
+	@RequestMapping(params = { GO_TO_EDIT })
 	public String goToEdit(ModelMap model, @RequestParam(required = true) String editUserIds,
 			@ModelAttribute("criteria") User criteria, BindingResult result) {
 		if (!StringUtils.isEmpty(editUserIds)) {
@@ -150,8 +153,8 @@ public class UsersController extends BaseController {
 				model.addAttribute("multipleSelectionForbidden", true);
 				return list(model, criteria, result);
 			} else {
-				User user = userService.getById(idList[0]);
-				model.addAttribute("user", user);
+				User userEdit = userService.getById(idList[0]);
+				model.addAttribute("userEdit", userEdit);
 				return "security/users/editUser";
 			}
 		} else {
@@ -159,4 +162,31 @@ public class UsersController extends BaseController {
 			return list(model, criteria, result);
 		}
 	}
+
+	@RequestMapping(params = { CANCEL_EDIT })
+	public String cancelEdit(ModelMap model) {
+		return ControllerUtils.redirect(URL);
+	}
+
+	@RequestMapping(params = { UPDATE })
+	public String update(ModelMap model, @ModelAttribute User userEdit, BindingResult result) {
+		if (StringUtils.isEmpty(userEdit.getName())) {
+			result.rejectValue(User.NAME, "mandatory");
+		}
+		if (StringUtils.isEmpty(userEdit.getUsername())) {
+			result.rejectValue(User.USERNAME, "mandatory");
+		}
+
+		if (!result.hasErrors()) {
+			User user = userService.getById(userEdit.getId());
+			user.setName(userEdit.getName());
+			user.setUsername(userEdit.getUsername());
+			userService.save(user);
+			return ControllerUtils.redirect(URL);
+		} else {
+			return URL;
+		}
+
+	}
+
 }

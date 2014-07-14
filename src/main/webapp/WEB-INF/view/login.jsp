@@ -12,7 +12,7 @@
 		<form:form method="post" action="performLogin" commandName="user">
 			<t:formSection>
 				<t:formField label="User">
-					<form:input path="username"/>
+					<form:input path="username" autofocus='autofocus'/>
 				</t:formField>
 				<t:formField label="Password">
 					<form:password path="password"/>

@@ -9,18 +9,20 @@ import test2.model.TraceInformation;
 
 public class ModelUtils {
 
-	public static void onUpdate(InterceptorProxy proxy, Serializable entity){
-		if(entity instanceof ITraceable ){
-			proxy.changeProperty(TraceInformation.LAST_UPDATE_DATE, new Date());
+	public static void onUpdate(InterceptorProxy proxy, Serializable entity) {
+		if (entity instanceof ITraceable) {
+			TraceInformation tr = ((ITraceable) entity).getTraceable();
+			tr.setLastUpdateDate(new Date());
+			proxy.changeProperty(ITraceable.TRACEABLE, tr);
 		}
 	}
-	
-	public void onCreate(InterceptorProxy proxy, Serializable entity){
-		if(entity instanceof ITraceable ){
+
+	public void onCreate(InterceptorProxy proxy, Serializable entity) {
+		if (entity instanceof ITraceable) {
 			TraceInformation tr = new TraceInformation();
 			tr.setCreationDate(new Date());
 			proxy.changeProperty(ITraceable.TRACEABLE, tr);
 		}
 	}
-	
+
 }

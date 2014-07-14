@@ -11,8 +11,9 @@
 <t:column>
 	<!-- CRITERIA -->
 	<t:formBox>
-		<form:form method="POST" commandName="user">
+		<form:form method="POST" commandName="userEdit">
 			<t:formSection>
+				<form:hidden path="id"/>
 				<t:formField label="Name">
 					<form:input path="name" autofocus='autofocus'/>
 					<form:errors path="name" cssClass="error" ></form:errors>
@@ -22,14 +23,14 @@
 					<form:errors path="username" cssClass="error" ></form:errors>
 				</t:formField>
 			</t:formSection>
-			<input type="submit" value="Edit" name="edit"/>
+			<input type="submit" value="Edit" name="update"/>
 			<input type="submit" value="Cancel" name="cancelEdit"/>
 		</form:form>
 	</t:formBox>
 </t:column>
 
 
-<t:debugServletAttributes showRequestAttributes="true" showRequestParameters="true" showRequestHeaders="true"></t:debugServletAttributes>
+<t:debugServletAttributes showRequestAttributes="true" showRequestParameters="true" showRequestHeaders="true" showSessionAttributes="true"></t:debugServletAttributes>
 
 <!-- FOOTER -->
 <%@include file="/WEB-INF/view/pageTemplate/footer.jsp" %>
