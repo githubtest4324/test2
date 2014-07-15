@@ -23,7 +23,7 @@
 					<form:errors path="username" cssClass="error" ></form:errors>
 				</t:formField>
 			</t:formSection>
-			<input type="submit" value="Edit" name="update"/>
+			<input type="submit" value="Update" name="update"/>
 			<input type="submit" value="Cancel" name="cancelEdit"/>
 		</form:form>
 	</t:formBox>

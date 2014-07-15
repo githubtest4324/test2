@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import test2.model.User;
 import test2.services.security.UserPrincipal;
@@ -26,9 +27,7 @@ import test2.utils.controller.ControllerUtils;
 @RequestMapping(UsersController.URL)
 @SessionAttributes(value = { "principal" })
 public class UsersController extends BaseController {
-	private static final String UPDATE = "update";
 	private static final String GO_TO_EDIT = "goToEdit";
-	private static final String CANCEL_EDIT = "cancelEdit";
 	private static final String CANCEL_ADD = "cancelAdd";
 	private static final String DELETE_CONFIRMATION = "deleteConfirmation";
 	private static final String REFRESH = "refresh";
@@ -146,7 +145,7 @@ public class UsersController extends BaseController {
 
 	@RequestMapping(params = { GO_TO_EDIT })
 	public String goToEdit(ModelMap model, @RequestParam(required = true) String editUserIds,
-			@ModelAttribute("criteria") User criteria, BindingResult result) {
+			@ModelAttribute("criteria") User criteria, BindingResult result, RedirectAttributes redirectAttributes) {
 		if (!StringUtils.isEmpty(editUserIds)) {
 			String[] idList = editUserIds.split(",");
 			if (idList.length > 1) {
@@ -154,39 +153,12 @@ public class UsersController extends BaseController {
 				return list(model, criteria, result);
 			} else {
 				User userEdit = userService.getById(idList[0]);
-				model.addAttribute("userEdit", userEdit);
-				return "security/users/editUser";
+				redirectAttributes.addFlashAttribute("userEdit", userEdit);
+				return ControllerUtils.redirect(EditUserController.URL);
 			}
 		} else {
 			model.addAttribute("noSelectionForbidden", true);
 			return list(model, criteria, result);
 		}
 	}
-
-	@RequestMapping(params = { CANCEL_EDIT })
-	public String cancelEdit(ModelMap model) {
-		return ControllerUtils.redirect(URL);
-	}
-
-	@RequestMapping(params = { UPDATE })
-	public String update(ModelMap model, @ModelAttribute User userEdit, BindingResult result) {
-		if (StringUtils.isEmpty(userEdit.getName())) {
-			result.rejectValue(User.NAME, "mandatory");
-		}
-		if (StringUtils.isEmpty(userEdit.getUsername())) {
-			result.rejectValue(User.USERNAME, "mandatory");
-		}
-
-		if (!result.hasErrors()) {
-			User user = userService.getById(userEdit.getId());
-			user.setName(userEdit.getName());
-			user.setUsername(userEdit.getUsername());
-			userService.save(user);
-			return ControllerUtils.redirect(URL);
-		} else {
-			return URL;
-		}
-
-	}
-
 }
