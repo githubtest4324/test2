@@ -13,7 +13,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import test2.SmartTabTagTemplate;
+import test2.SmartTabTemplate;
 
 public class SmartTab extends SimpleTagSupport {
 	public class TabInfo {
@@ -47,7 +47,7 @@ public class SmartTab extends SimpleTagSupport {
 		info.add(ti);
 
 		// Build output
-		new SmartTabTagTemplate().renderNoFlush(out, ti.uuid, jspBodyContent.toString());
+		new SmartTabTemplate().renderNoFlush(out, ti.uuid, jspBodyContent.toString());
 	}
 
 	public void setTitle(String title) {

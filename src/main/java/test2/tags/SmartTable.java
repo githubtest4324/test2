@@ -11,7 +11,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 
-import test2.TableTagTemplate;
+import test2.SmartTableTemplate;
 
 @Component
 public class SmartTable extends SimpleTagSupport {
@@ -26,7 +26,7 @@ public class SmartTable extends SimpleTagSupport {
 		if (StringUtils.isEmpty(tableId)) {
 			tableId = new Integer((int) (Math.random() * 1000)).toString();
 		}
-		new TableTagTemplate().renderNoFlush(out, entities, tableId, selectedIds);
+		new SmartTableTemplate().renderNoFlush(out, entities, tableId, selectedIds);
 	}
 
 	public void setEntities(List<Serializable> entities) {
