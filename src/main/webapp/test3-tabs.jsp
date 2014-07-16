@@ -15,8 +15,16 @@
 	</t:smartTab>
 	<t:smartTab title="Tab2">
 	Tab2 content
+		<t:smartTabs>
+			<t:smartTab title="Tab4">
+			Tab4 content
+			</t:smartTab>
+			<t:smartTab title="Tab5">
+			Tab5 content
+			</t:smartTab>
+		</t:smartTabs>
 	</t:smartTab>
-	<t:smartTab title="Tab2">
+	<t:smartTab title="Tab3">
 	Tab3 content
 	</t:smartTab>
 </t:smartTabs>

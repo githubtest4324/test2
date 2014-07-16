@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.JspFragment;
@@ -21,28 +22,34 @@ public class SmartTabsTag extends SimpleTagSupport {
 
 		StringWriter jspBodyContent = new StringWriter();
 		JspWriter out = getJspContext().getOut();
-		JspFragment jspBody = getJspBody();
-		jspBody.invoke(jspBodyContent);
 
+		// Hold a reference to current context info. Just in case this tab widget is situated within another tab widget.
 		@SuppressWarnings("unchecked")
-		List<TabInfo> ti = (List<TabInfo>) getJspContext().getAttribute(TAB_INFO);
+		List<TabInfo> oldTabInfo = (List<TabInfo>) getJspContext().getAttribute(TAB_INFO);
+
+		// Evaluate content
+		JspFragment jspBody = getJspBody();
+		getJspContext().setAttribute(TAB_INFO, null); // Will be filled during invoke()
+		jspBody.invoke(jspBodyContent);
+		@SuppressWarnings("unchecked")
+		List<TabInfo> tabInfo = (List<TabInfo>) getJspContext().getAttribute(TAB_INFO);
 		String tabsUuid = UUID.randomUUID().toString();
 
 		// If no tab is active, set the first one
 		boolean hasActiveTab = false;
-		for (TabInfo t : ti) {
+		for (TabInfo t : tabInfo) {
 			if (t.active) {
 				hasActiveTab = true;
 				break;
 			}
 		}
-		if (!hasActiveTab && ti.size() > 0) {
-			ti.get(0).active = true;
+		if (!hasActiveTab && tabInfo.size() > 0) {
+			tabInfo.get(0).active = true;
 		}
 
 		// Build output
-		new SmartTabsTagTemplate().renderNoFlush(out, tabsUuid, ti, jspBodyContent.toString());
+		new SmartTabsTagTemplate().renderNoFlush(out, tabsUuid, tabInfo, jspBodyContent.toString());
 
-		getJspContext().setAttribute(TAB_INFO, null);
+		getJspContext().setAttribute(TAB_INFO, oldTabInfo);
 	}
 }
