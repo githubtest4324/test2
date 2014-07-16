@@ -20,7 +20,7 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/form.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/flex.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/smartTable.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/tabs.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/smartTabs.css" />
 
 	<script language="javascript" type="text/javascript" src="${root}/js/jquery-1.11.1.js" ></script>
 	<script language="javascript" type="text/javascript" src="${root}/js/smartTable.js" ></script>
