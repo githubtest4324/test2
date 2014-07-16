@@ -1,3 +1,4 @@
+<%escape #n>
 <%import>
 	test2.model.User;
 	java.util.List;

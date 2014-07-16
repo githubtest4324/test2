@@ -1,0 +1,18 @@
+<%escape #n>
+<%import>
+	test2.tags.SmartTabTag.TabInfo;
+</%import>
+<%args>
+	String tabsUuid;
+	java.util.List<TabInfo> tabInfoList;
+	String content;
+</%args>
+
+<ul class="tabs clearfix" data-tabgroup="<% tabsUuid %>">
+	<%for TabInfo ti : tabInfoList %>
+		<li><a href="#<% ti.uuid %>" class="active"><% ti.title %></a></li>
+	</%for>
+</ul>
+<section id="<% tabsUuid %>" class="tabgroup">
+	<% content %>
+</section>

@@ -1,0 +1,13 @@
+<%escape #n>
+<%import>
+</%import>
+<%args>
+	String uuid;
+	String content;
+</%args>
+
+	<div id="<% uuid %>">
+		<% content %>
+	</div>
+
+		

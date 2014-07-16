@@ -34,12 +34,12 @@
 		<servlet-name>jsp</servlet-name>
 		<url-pattern>*.css</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>jsp</servlet-name>
-		<url-pattern>*.js</url-pattern>
-	</servlet-mapping>
 	
 	<!-- 	Mapping for default server     -->
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.html</url-pattern>

@@ -1,8 +1,3 @@
-/*
-<%@ page language="java" contentType="application/javascript; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-*/
-
 // Conventions:
 // -each <tr> will have an attribute named smtId. This identify uniquely the row and is sent back to server.
 

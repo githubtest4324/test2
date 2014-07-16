@@ -151,4 +151,20 @@
 		</attribute>
 	</tag>
 	
+	<tag>
+		<name>smartTabs</name>
+		<tag-class>test2.tags.SmartTabsTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	<tag>
+		<name>smartTab</name>
+		<tag-class>test2.tags.SmartTabTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>title</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
 </taglib>
