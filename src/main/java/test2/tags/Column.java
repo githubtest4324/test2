@@ -10,7 +10,7 @@ import test2.utils.TagUtils.FlexAlign;
 import test2.utils.TagUtils.FlexDirection;
 import test2.utils.TagUtils.FlexJustify;
 
-public class ColumnTag extends SimpleTagSupport {
+public class Column extends SimpleTagSupport {
 	private String type;
 	private String style;
 	private FlexAlign align;

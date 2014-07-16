@@ -5,16 +5,15 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import test2.SmartTabsTagTemplate;
-import test2.tags.SmartTabTag.TabInfo;
+import test2.tags.SmartTab.TabInfo;
 
-public class SmartTabsTag extends SimpleTagSupport {
+public class SmartTabs extends SimpleTagSupport {
 	public static final String TAB_INFO = "tabInfo";
 
 	@Override

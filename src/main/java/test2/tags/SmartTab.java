@@ -1,6 +1,6 @@
 package test2.tags;
 
-import static test2.tags.SmartTabsTag.TAB_INFO;
+import static test2.tags.SmartTabs.TAB_INFO;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -15,7 +15,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import test2.SmartTabTagTemplate;
 
-public class SmartTabTag extends SimpleTagSupport {
+public class SmartTab extends SimpleTagSupport {
 	public class TabInfo {
 		public String title;
 		public String uuid;

@@ -1,6 +1,6 @@
 <%escape #n>
 <%import>
-	test2.tags.SmartTabTag.TabInfo;
+	test2.tags.SmartTab.TabInfo;
 </%import>
 <%args>
 	String tabsUuid;

@@ -9,25 +9,25 @@
 
 <!-- CONTENT-->
 
-<t:smartTabs>
-	<t:smartTab title="Tab1">
+<t:tabs>
+	<t:tab title="Tab1">
 	Tab1 content
-	</t:smartTab>
-	<t:smartTab title="Tab2">
+	</t:tab>
+	<t:tab title="Tab2">
 	Tab2 content
-		<t:smartTabs>
-			<t:smartTab title="Tab4">
+		<t:tabs>
+			<t:tab title="Tab4">
 			Tab4 content
-			</t:smartTab>
-			<t:smartTab title="Tab5">
+			</t:tab>
+			<t:tab title="Tab5">
 			Tab5 content
-			</t:smartTab>
-		</t:smartTabs>
-	</t:smartTab>
-	<t:smartTab title="Tab3">
+			</t:tab>
+		</t:tabs>
+	</t:tab>
+	<t:tab title="Tab3">
 	Tab3 content
-	</t:smartTab>
-</t:smartTabs>
+	</t:tab>
+</t:tabs>
 
 <!-- AICI AM RAMAS: * am bele tab-uri sunt selectate; * sa pot avea tab in tab  -->
 <!-- FOOTER -->

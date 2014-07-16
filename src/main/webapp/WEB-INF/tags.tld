@@ -11,7 +11,7 @@
 	<!-- 	DEBUG TAGS -->		
 	<tag>
 		<name>debugServletAttributes</name>
-		<tag-class>test2.tags.DebugServletAttributesTag</tag-class>
+		<tag-class>test2.tags.DebugServletAttributes</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>showRequestAttributes</name>
@@ -37,7 +37,7 @@
 	
 	<tag>
 		<name>row</name>
-		<tag-class>test2.tags.RowTag</tag-class>
+		<tag-class>test2.tags.Row</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>type</name>
@@ -62,7 +62,7 @@
 	</tag>
 	<tag>
 		<name>column</name>
-		<tag-class>test2.tags.ColumnTag</tag-class>
+		<tag-class>test2.tags.Column</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>type</name>
@@ -89,7 +89,7 @@
 	<!-- 	Security tags -->
 	<tag>
 		<name>allowed</name>
-		<tag-class>test2.tags.IsAllowedTag</tag-class>
+		<tag-class>test2.tags.IsAllowed</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>roles</name>
@@ -101,7 +101,7 @@
 	<!-- 	Form tags -->
 	<tag>
 		<name>formBox</name>
-		<tag-class>test2.tags.FormBoxTag</tag-class>
+		<tag-class>test2.tags.FormBox</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>title</name>
@@ -111,7 +111,7 @@
 	</tag>
 	<tag>
 		<name>formSection</name>
-		<tag-class>test2.tags.FormSectionTag</tag-class>
+		<tag-class>test2.tags.FormSection</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>title</name>
@@ -121,7 +121,7 @@
 	</tag>
 	<tag>
 		<name>formField</name>
-		<tag-class>test2.tags.FormFieldTag</tag-class>
+		<tag-class>test2.tags.FormField</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>label</name>
@@ -132,7 +132,7 @@
 	
 	<tag>
 		<name>table</name>
-		<tag-class>test2.tags.TableTag</tag-class>
+		<tag-class>test2.tags.SmartTable</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>entities</name>
@@ -152,13 +152,13 @@
 	</tag>
 	
 	<tag>
-		<name>smartTabs</name>
-		<tag-class>test2.tags.SmartTabsTag</tag-class>
+		<name>tabs</name>
+		<tag-class>test2.tags.SmartTabs</tag-class>
 		<body-content>scriptless</body-content>
 	</tag>
 	<tag>
-		<name>smartTab</name>
-		<tag-class>test2.tags.SmartTabTag</tag-class>
+		<name>tab</name>
+		<tag-class>test2.tags.SmartTab</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>title</name>

@@ -8,28 +8,31 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-public class FormBoxTag extends SimpleTagSupport {
-	private String title;
+/**
+ * Logical field formed by a label (optional) and a form element, horizontally aligned.
+ */
+public class FormField extends SimpleTagSupport {
+	private String label;
 
 	@Override
 	public void doTag() throws JspException, IOException {
-		JspWriter out = getJspContext().getOut();
 
 		StringWriter jspBodyContent = new StringWriter();
+		JspWriter out = getJspContext().getOut();
 		JspFragment jspBody = getJspBody();
 		jspBody.invoke(jspBodyContent);
 
 		// Build output
-		out.append("<div class='box'>");
-		if (title != null) {
-			out.append(String.format("<div style='text-align: left;'><span>%s</span></div><hr/>", title));
+		out.append("<div style='display: flex;flex-direction: row;align-items: center;'>");
+		if (label != null) {
+			out.append(String.format("<span>%s</span>", label));
 		}
 		out.append(jspBodyContent.toString());
 		out.append("</div>");
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 }

@@ -24,7 +24,7 @@ import test2.services.security.UserPrincipal;
  * Security check for sections of view.
  */
 @Component
-public class IsAllowedTag extends SimpleTagSupport {
+public class IsAllowed extends SimpleTagSupport {
 
 	@Autowired
 	SecurityService securityService;

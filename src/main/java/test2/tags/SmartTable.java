@@ -1,7 +1,6 @@
 package test2.tags;
 
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
 import test2.TableTagTemplate;
 
 @Component
-public class TableTag extends SimpleTagSupport {
+public class SmartTable extends SimpleTagSupport {
 
 	private List<Serializable> entities;
 	private String tableId;

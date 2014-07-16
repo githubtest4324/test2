@@ -11,7 +11,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import test2.utils.ServletUtils;
 
-public class DebugServletAttributesTag extends SimpleTagSupport {
+public class DebugServletAttributes extends SimpleTagSupport {
 	Boolean showRequestAttributes = false;
 	Boolean showSessionAttributes = false;
 	Boolean showRequestParameters = false;
