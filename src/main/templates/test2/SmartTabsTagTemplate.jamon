@@ -10,7 +10,11 @@
 
 <ul class="tabs clearfix" data-tabgroup="<% tabsUuid %>">
 	<%for TabInfo ti : tabInfoList %>
-		<li><a href="#<% ti.uuid %>" class="active"><% ti.title %></a></li>
+		<%java>
+			String activeStr = ti.active==true?"class='active'":"";
+		</%java>
+
+		<li><a href="#<% ti.uuid %>" <% activeStr %>><% ti.title %></a></li>
 	</%for>
 </ul>
 <section id="<% tabsUuid %>" class="tabgroup">

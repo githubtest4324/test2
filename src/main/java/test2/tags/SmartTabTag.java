@@ -19,9 +19,11 @@ public class SmartTabTag extends SimpleTagSupport {
 	public class TabInfo {
 		public String title;
 		public String uuid;
+		public Boolean active;
 	}
 
 	private String title;
+	private boolean active;
 
 	@Override
 	public void doTag() throws JspException, IOException {
@@ -41,6 +43,7 @@ public class SmartTabTag extends SimpleTagSupport {
 		TabInfo ti = new TabInfo();
 		ti.title = title;
 		ti.uuid = UUID.randomUUID().toString();
+		ti.active = active;
 		info.add(ti);
 
 		// Build output
@@ -49,6 +52,10 @@ public class SmartTabTag extends SimpleTagSupport {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

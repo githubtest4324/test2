@@ -16,8 +16,11 @@
 	<t:smartTab title="Tab2">
 	Tab2 content
 	</t:smartTab>
+	<t:smartTab title="Tab2">
+	Tab3 content
+	</t:smartTab>
 </t:smartTabs>
 
-AICI AM RAMAS: * am bele tab-uri sunt selectate; * sa pot avea tab in tab 
+<!-- AICI AM RAMAS: * am bele tab-uri sunt selectate; * sa pot avea tab in tab  -->
 <!-- FOOTER -->
 <%@include file="/WEB-INF/view/pageTemplate/footer.jsp"%>

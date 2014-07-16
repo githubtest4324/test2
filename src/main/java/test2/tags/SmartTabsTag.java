@@ -28,6 +28,18 @@ public class SmartTabsTag extends SimpleTagSupport {
 		List<TabInfo> ti = (List<TabInfo>) getJspContext().getAttribute(TAB_INFO);
 		String tabsUuid = UUID.randomUUID().toString();
 
+		// If no tab is active, set the first one
+		boolean hasActiveTab = false;
+		for (TabInfo t : ti) {
+			if (t.active) {
+				hasActiveTab = true;
+				break;
+			}
+		}
+		if (!hasActiveTab && ti.size() > 0) {
+			ti.get(0).active = true;
+		}
+
 		// Build output
 		new SmartTabsTagTemplate().renderNoFlush(out, tabsUuid, ti, jspBodyContent.toString());
 
