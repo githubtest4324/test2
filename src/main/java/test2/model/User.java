@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.GenericGenerator;
