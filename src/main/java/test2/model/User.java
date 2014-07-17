@@ -49,9 +49,7 @@ public class User implements Serializable, InterceptorEntity, ITraceable {
 	}
 
 	public void onCreate(InterceptorProxy proxy) {
-		TraceInformation tr = new TraceInformation();
-		tr.setCreationDate(new Date());
-		proxy.changeProperty("traceable", tr);
+		ModelUtils.onCreate(proxy, this);
 	}
 
 	public static final String ID = "id";

@@ -17,7 +17,7 @@ public class ModelUtils {
 		}
 	}
 
-	public void onCreate(InterceptorProxy proxy, Serializable entity) {
+	public static void onCreate(InterceptorProxy proxy, Serializable entity) {
 		if (entity instanceof ITraceable) {
 			TraceInformation tr = new TraceInformation();
 			tr.setCreationDate(new Date());

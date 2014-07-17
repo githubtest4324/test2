@@ -37,7 +37,7 @@ public class LoginController extends BaseController {
 	private UserService userService;
 
 	@RequestMapping(PERFORM_LOGIN)
-	public String login(ModelMap model, @ModelAttribute("user") User user, BindingResult result) {
+	public String performLogin(ModelMap model, @ModelAttribute User user, BindingResult result) {
 		logger.info(String.format("Login using user: %s, pass: %s", user.getUsername(), user.getPassword()));
 		if (loginService.isValidLogin(user.getUsername(), user.getPassword())) {
 			logger.info("Login successfull");
