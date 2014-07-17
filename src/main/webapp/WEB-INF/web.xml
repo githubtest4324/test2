@@ -13,6 +13,23 @@
     		<taglib-location>/WEB-INF/tags.tld</taglib-location>
     	</taglib>
     </jsp-config>
+
+	<context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring-security.xml, /WEB-INF/employee-servlet.xml</param-value>
+    </context-param>
+<!-- 	<filter> -->
+<!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
+<!-- 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>  
+
     <servlet>
         <servlet-name>employee</servlet-name>
         <servlet-class>
@@ -60,12 +77,5 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.png</url-pattern>
 	</servlet-mapping>    
-	<context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/employee-servlet.xml</param-value>
-    </context-param>
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>  
     
 </web-app>
