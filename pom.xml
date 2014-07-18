@@ -165,12 +165,19 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-			<version>${org.springframework.version}</version>
-        </dependency>
-	
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.springframework.security</groupId> -->
+<!-- 			<artifactId>spring-security-taglibs</artifactId> -->
+<!-- 			<version>${org.springframework.version}</version> -->
+<!-- 		</dependency> -->
+
+		<!-- Json parser for Spring Mvc ajax interaction -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.6.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -330,7 +337,7 @@
 							<goal>translate</goal>
 						</goals>
 						<configuration>
-<!-- 							<templateOutputDir>src/main/java</templateOutputDir> -->
+							<!-- <templateOutputDir>src/main/java</templateOutputDir> -->
 						</configuration>
 					</execution>
 				</executions>

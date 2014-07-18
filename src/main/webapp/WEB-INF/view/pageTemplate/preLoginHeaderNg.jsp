@@ -27,5 +27,7 @@
 	<script language="javascript" type="text/javascript" src="${root}/js/jquery-1.11.1.js" ></script>
 	<script language="javascript" type="text/javascript" src="${root}/js/ng-grid-2.0.11.min.js" ></script>
 	<script language="javascript" type="text/javascript" src="${root}/js/smartTable.js" ></script>
+	<script language="javascript" type="text/javascript" src="${root}/test.js" ></script>
+
 	<title>${title}</title>
 </head>
