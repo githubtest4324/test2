@@ -30,4 +30,5 @@
 	<script language="javascript" type="text/javascript" src="${root}/test.js" ></script>
 
 	<title>${title}</title>
+	<script>var rootPath = "${pageContext.request.contextPath}"</script>
 </head>

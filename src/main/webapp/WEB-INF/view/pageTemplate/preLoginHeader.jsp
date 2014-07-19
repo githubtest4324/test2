@@ -9,7 +9,6 @@
 
 <!-- Shortcut variables -->
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -26,3 +25,4 @@
 	<script language="javascript" type="text/javascript" src="${root}/js/smartTable.js" ></script>
 	<title>${title}</title>
 </head>
+<script>var rootPath = "${pageContext.request.contextPath}"</script>
