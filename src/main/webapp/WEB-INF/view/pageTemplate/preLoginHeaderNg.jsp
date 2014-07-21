@@ -16,20 +16,14 @@
 	<script>var rootPath = "${pageContext.request.contextPath}"</script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="${root}/css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/box.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/menu.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/body.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/form.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/flex.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/smartTable.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/smartTabs.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/ng-grid.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/bootstrap.css" />
 
 	<script type="text/javascript" src="${root}/js/angular.min.js" ></script>
 	<script type="text/javascript" src="${root}/js/jquery-1.11.1.js" ></script>
+	<script type="text/javascript" src="${root}/js/bootstrap.js" ></script>
 	<script type="text/javascript" src="${root}/js/ng-grid-2.0.11.min.js" ></script>
-	<script type="text/javascript" src="${root}/js/smartTable.js" ></script>
 	<script type="text/javascript" src="${root}/test.js" ></script>
 
 	<title>${title}</title>
