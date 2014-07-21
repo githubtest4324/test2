@@ -16,14 +16,17 @@
 	<script>var rootPath = "${pageContext.request.contextPath}"</script>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/menu.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/ng-grid.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/bootstrap.css" />
 
-	<script type="text/javascript" src="${root}/js/jquery-1.11.1.js" ></script>
-	<script type="text/javascript" src="${root}/js/angular.min.js" ></script>
-	<script type="text/javascript" src="${root}/js/bootstrap.js" ></script>
-	<script type="text/javascript" src="${root}/js/ng-grid-2.0.11.min.js" ></script>
-	<script type="text/javascript" src="${root}/test.js" ></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular-route.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" ></script>
+	<script src="${root}/js/ng-grid-2.0.11.min.js" ></script>
+	<script src="${root}/test.js" ></script>
 
 	<title>${title}</title>
