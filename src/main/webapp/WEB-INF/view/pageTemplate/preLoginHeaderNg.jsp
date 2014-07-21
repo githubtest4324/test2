@@ -20,8 +20,8 @@
 	<link rel="stylesheet" type="text/css" href="${root}/css/ng-grid.css" />
 	<link rel="stylesheet" type="text/css" href="${root}/css/bootstrap.css" />
 
-	<script type="text/javascript" src="${root}/js/angular.min.js" ></script>
 	<script type="text/javascript" src="${root}/js/jquery-1.11.1.js" ></script>
+	<script type="text/javascript" src="${root}/js/angular.min.js" ></script>
 	<script type="text/javascript" src="${root}/js/bootstrap.js" ></script>
 	<script type="text/javascript" src="${root}/js/ng-grid-2.0.11.min.js" ></script>
 	<script type="text/javascript" src="${root}/test.js" ></script>
