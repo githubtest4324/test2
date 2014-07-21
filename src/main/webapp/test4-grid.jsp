@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <%@page import="test2.utils.TagUtils.FlexJustify"%>
 <%@page import="test2.utils.TagUtils.FlexAlign"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
