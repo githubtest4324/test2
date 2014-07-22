@@ -6,22 +6,23 @@
 
 <html ng-app="myApp">
 <head>
-<%-- <%@include file="/WEB-INF/view/pageTemplate/headerNg.jsp"%> --%>
-<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <script>
-	var rootPath = "${pageContext.request.contextPath}"
+	var contextPath = "${contextPath}"
 </script>
-
-<!-- SCROLLS -->
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="${contextPath}/css/ng-grid.css" />
 
-<!-- SPELLS -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular-route.js"></script>
+<script src="${contextPath}/js/ng-grid-2.0.11.min.js" ></script>
 
 
-<script src="${rootPath}/js/mainController.js"></script>
+<script src="${contextPath}/js/mainController.js"></script>
 </head>
 
 <body ng-controller="mainController">
@@ -37,7 +38,7 @@
 			</ul>
 		</div>
 	</nav>
-	root path: ${rootPath }
+	root path: ${contextPath}
 
 	<div id="main">
 		<div ng-view></div>

@@ -6,7 +6,6 @@
 
 <html>
 <head>
-<%-- <%@include file="/WEB-INF/view/pageTemplate/headerNg.jsp"%> --%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <script>
 	var rootPath = "${pageContext.request.contextPath}"

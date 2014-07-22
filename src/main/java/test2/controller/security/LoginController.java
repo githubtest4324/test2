@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import test2.controller.HomeController;
+import test2.controller.security.users.UsersController;
 import test2.model.User;
 import test2.services.security.LoginService;
 import test2.services.security.UserPrincipal;
@@ -43,7 +44,7 @@ public class LoginController extends BaseController {
 			logger.info("Login successfull");
 			User realUser = userService.getByUsername(user.getUsername());
 			model.addAttribute("principal", new UserPrincipal(realUser));
-			return ControllerUtils.redirect(HomeController.URL, HomeController.MAIN);
+			return ControllerUtils.redirect(UsersController.URL);
 		} else {
 			// model.addAttribute("outcome", false);
 			result.reject("login.error.accessDenied");

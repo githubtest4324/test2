@@ -10,8 +10,8 @@ app.controller('MyCtrl', function($scope, $http) {
 	
 	$scope.getDataAsync = function () {
 		setTimeout(function () {
-			console.log(rootPath+'/ajax/getUsers');
-			$http.get(rootPath+'/ajax/getUsers').success(function (largeLoad) {
+			console.log(contextPath+'/ajax/getUsers');
+			$http.get(contextPath+'/ajax/getUsers').success(function (largeLoad) {
 		        $scope.myData = largeLoad;
 		        $scope.totalServerItems = largeLoad.length;
 			});

@@ -12,17 +12,17 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="${root}/css/reset.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/box.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/menu.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/body.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/form.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/flex.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/smartTable.css" />
-	<link rel="stylesheet" type="text/css" href="${root}/css/smartTabs.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/reset.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/box.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/menu.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/body.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/form.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/flex.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/smartTable.css" />
+	<link rel="stylesheet" type="text/css" href="${root}/css/old/smartTabs.css" />
 
-	<script language="javascript" type="text/javascript" src="${root}/js/jquery-1.11.1.js" ></script>
-	<script language="javascript" type="text/javascript" src="${root}/js/smartTable.js" ></script>
+ 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script language="javascript" type="text/javascript" src="${root}/js/old/smartTable.js" ></script>
 	<title>${title}</title>
 </head>
 <script>var rootPath = "${pageContext.request.contextPath}"</script>
