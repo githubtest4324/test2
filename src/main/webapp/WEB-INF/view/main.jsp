@@ -3,10 +3,11 @@
 <%@page import="test2.utils.TagUtils.FlexAlign"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <html ng-app="myApp">
 <head>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <script>
 	var contextPath = "${contextPath}"
 </script>
@@ -19,33 +20,67 @@
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular-route.js"></script>
-<script src="${contextPath}/js/ng-grid-2.0.11.min.js" ></script>
+<script src="${contextPath}/js/ng-grid-2.0.11.min.js"></script>
+<!-- Bootstrap plugin for hover support on dropdown menus. Link: https://github.com/CWSpear/bootstrap-hover-dropdown -->
+<script src="${contextPath}/js/bootstrap-hover-dropdown.js"></script>
+
 
 
 <script src="${contextPath}/js/mainController.js"></script>
 </head>
 
 <body ng-controller="mainController">
-	<nav class="navbar navbar-default">
-		<div class="container">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<!-- Toggle for better mobile display -->
 			<div class="navbar-header">
-				<a class="navbar-brand" href="/">Angular Routing Example</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
 			</div>
 
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-				<li><a href="#about"><i class="fa fa-shield"></i>Security</a></li>
-			</ul>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#"><i class="fa fa-home"></i>Home</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ><i class='fa fa-shield'></i>Security<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#about">Users</a></li>
+							<li><a href="#">Roles</a></li>
+							<li class="divider"></li>
+							<li><a href="#">Logout</a></li>
+						</ul></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>Username |</li>
+					<li><spring:message code="version"/></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
+		<!-- /.container-fluid -->
 	</nav>
-	root path: ${contextPath}
 
-	<div id="main">
-		<div ng-view></div>
-	</div>
+<!-- 		<nav class="navbar navbar-default"> -->
+<!-- 			<div class="container"> -->
+<!-- 				<div class="navbar-header"> -->
+<!-- 					<a class="navbar-brand" href="/">Angular Routing Example</a> -->
+<!-- 				</div> -->
+<!-- 				<ul class="nav navbar-nav navbar-right"> -->
+<!-- 					<li><a href="#"><i class="fa fa-home"></i> Home</a></li> -->
+<!-- 					<li><a href="#about"><i class="fa fa-shield"></i>Security</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+<!-- 		</nav> -->
 
-	<footer class="text-right">
-		<p>Copyright @2014</p>
-	</footer>
+		<div id="main">
+			<div ng-view></div>
+		</div>
+
+		<footer class="text-right">
+			<p>Copyright @2014</p>
+		</footer>
 </body>
 </html>
