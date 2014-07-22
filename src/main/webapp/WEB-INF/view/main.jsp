@@ -9,7 +9,7 @@
 <head>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <script>
-	var contextPath = "${contextPath}"
+	var contextPath = "${contextPath}";
 </script>
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -44,10 +44,10 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#"><i class="fa fa-home"></i>Home</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" ><i class='fa fa-shield'></i>Security<span
-							class="caret"></span></a>
+					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+							class='fa fa-shield'></i>Security<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#about">Users</a></li>
+							<li><a href="#security/listUsers">Users</a></li>
 							<li><a href="#">Roles</a></li>
 							<li class="divider"></li>
 							<li><a href="#">Logout</a></li>
@@ -55,7 +55,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li>Username |</li>
-					<li><spring:message code="version"/></li>
+					<li><spring:message code="version" /></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -63,24 +63,12 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-<!-- 		<nav class="navbar navbar-default"> -->
-<!-- 			<div class="container"> -->
-<!-- 				<div class="navbar-header"> -->
-<!-- 					<a class="navbar-brand" href="/">Angular Routing Example</a> -->
-<!-- 				</div> -->
-<!-- 				<ul class="nav navbar-nav navbar-right"> -->
-<!-- 					<li><a href="#"><i class="fa fa-home"></i> Home</a></li> -->
-<!-- 					<li><a href="#about"><i class="fa fa-shield"></i>Security</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</div> -->
-<!-- 		</nav> -->
+	<div id="main" class="container-fluid">
+		<div ng-view></div>
+	</div>
 
-		<div id="main">
-			<div ng-view></div>
-		</div>
-
-		<footer class="text-right">
-			<p>Copyright @2014</p>
-		</footer>
+	<footer class="text-right">
+		<p>Copyright @2014</p>
+	</footer>
 </body>
 </html>

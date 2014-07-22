@@ -6,8 +6,8 @@
 				templateUrl : 'pages/home.jsp',
 				controller  : 'mainController'
 			})
-			.when('/about', {
-				templateUrl : 'pages/listUsers.jsp',
+			.when('/security/listUsers', {
+				templateUrl : 'pages/security/users/listUsers.jsp',
 				controller  : 'listUsersController'
 			});
 	});
