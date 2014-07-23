@@ -1,15 +1,12 @@
 <?xml  version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:jee="http://www.springframework.org/schema/jee"
-    xmlns:lang="http://www.springframework.org/schema/lang"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
@@ -17,53 +14,107 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd"
-        >
-    <context:annotation-config />
-    <context:component-scan base-package="test2" />
-    <mvc:annotation-driven/>
-    <bean id="jspViewResolver"
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass"
-            value="org.springframework.web.servlet.view.JstlView"></property>
-        <property name="prefix" value="/WEB-INF/view/"></property>
-        <property name="suffix" value=".jsp"></property>
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- Annotation configuration -->
+	<context:annotation-config />
+	<context:component-scan base-package="test2" />
+
+	<!-- Spring Mvc -->
+	<mvc:annotation-driven />
+    <mvc:default-servlet-handler/>
+<!--     <mvc:interceptors> -->
+<!--     	Login Interceptor -->
+<!--         <mvc:interceptor> -->
+<!--             <mvc:mapping path="/protected/**"/> -->
+<!--             <bean class="test2.interceptor.LoginInterceptor"/> -->
+<!--         </mvc:interceptor> -->
+<!--         workaround to fix IE8 problem -->
+<!--         <bean id="webContentInterceptor" -->
+<!--               class="org.springframework.web.servlet.mvc.WebContentInterceptor"> -->
+<!--             <property name="cacheSeconds" value="0"/> -->
+<!--             <property name="useExpiresHeader" value="true"/> -->
+<!--             <property name="useCacheControlHeader" value="true"/> -->
+<!--             <property name="useCacheControlNoStore" value="true"/> -->
+<!--         </bean> -->
+<!--     </mvc:interceptors> -->
+
+	<!-- SpringSecurity -->
+<!--     <security:global-method-security secured-annotations="enabled" /> -->
+ 
+<!--     <security:http auto-config="true" use-expressions="true" access-denied-page="/login?error=403"> -->
+ 
+<!--         <security:intercept-url pattern="/" access="permitAll" /> -->
+<!--         <security:intercept-url pattern="/protected/**" access="isAuthenticated()" /> -->
+ 
+<!--         <security:form-login login-page="/login" authentication-failure-url="/login?error=403" default-target-url="/protected/home" /> -->
+ 
+<!--         <security:logout invalidate-session="true" logout-success-url="/login" logout-url="/logout" /> -->
+<!--     </security:http> -->
+ 
+<!--     <security:authentication-manager> -->
+<!--         <security:authentication-provider> -->
+<!--             <security:jdbc-user-service -->
+<!--                     data-source-ref="myContactDataSource" -->
+<!--                     users-by-username-query="select email, password, enabled from system_user where email = ?" -->
+<!--                     authorities-by-username-query="select u.email as login, u.user_role as role from system_user u where u.email = ?" /> -->
+<!--         </security:authentication-provider> -->
+<!--     </security:authentication-manager> -->
+
+
+	<!-- View resolver -->
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property name="prefix" value="/WEB-INF/view/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- Bundles -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+        <property name="defaultLocale" value="en"/>
     </bean>
-    <bean id="messageSource"
-        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="classpath:messages"></property>
-        <property name="defaultEncoding" value="UTF-8"></property>
-    </bean>
-    <bean id="propertyConfigurer"
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-        p:location="/WEB-INF/jdbc.properties"></bean>
-    <bean id="dataSource"
-        class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-        p:driverClassName="${jdbc.driverClassName}"
-        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
-        p:password="${jdbc.password}"></bean>
-    <bean id="sessionFactory"
-        class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
-        <property name="configLocation">
-            <value>classpath:hibernate.cfg.xml</value>
-        </property>
-        <property name="configurationClass">
-            <value>org.hibernate.cfg.AnnotationConfiguration</value>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">${jdbc.dialect}</prop>
-            </props>
-        </property>
-        <property name="entityInterceptor" ref="baseInterceptor"/>
-    </bean>
-    
-    <tx:annotation-driven />
-    <bean id="transactionManager"
-        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"></property>
-    </bean>
+
+	<!-- Database configuration -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="/WEB-INF/jdbc.properties"></bean>
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="${jdbc.driverClassName}"
+		p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}"></bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		<property name="configurationClass">
+			<value>org.hibernate.cfg.AnnotationConfiguration</value>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
+			</props>
+		</property>
+		<property name="entityInterceptor" ref="baseInterceptor" />
+	</bean>
+
+	<!-- Transaction configuration -->
+	<tx:annotation-driven />
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<!-- Hibernate interceptors -->
 	<bean id="baseInterceptor" class="test2.interceptors.BaseInterceptor">
-	</bean>    
+	</bean>
 </beans>
