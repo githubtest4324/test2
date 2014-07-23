@@ -23,7 +23,8 @@
 <script src="${contextPath}/js/ng-grid-2.0.11.min.js"></script>
 <!-- Bootstrap plugin for hover support on dropdown menus. Link: https://github.com/CWSpear/bootstrap-hover-dropdown -->
 <script src="${contextPath}/js/bootstrap-hover-dropdown.js"></script>
-
+<!-- Angular bootstrap ui -->
+<script src="${contextPath}/js/ui-bootstrap-tpls-0.11.0.min.js"></script>
 
 
 <script src="${contextPath}/js/mainController.js"></script>

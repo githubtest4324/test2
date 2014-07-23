@@ -1,4 +1,4 @@
-	var myApp = angular.module('myApp', ['ngRoute']);
+	var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap']);
 	
 	myApp.config(function($routeProvider) {
 		$routeProvider
@@ -11,6 +11,14 @@
 				controller  : 'listUsersController'
 			});
 	});
+	
+	myApp.config(['$tooltipProvider', function($tooltipProvider){
+		$tooltipProvider.options({
+			animation: false,
+			popupDelay: 400,
+			appendToBody: true
+			});
+		}]);	
 
 	myApp.controller('mainController', function($scope) {
 		$scope.message = 'Everyone come and see how good I look!';
