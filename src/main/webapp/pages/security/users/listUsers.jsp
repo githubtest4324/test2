@@ -25,7 +25,7 @@
 		<button type="button" class="btn btn-default" tooltip="Search" ><i class="fa fa-search"></i></button>
 		<button type="button" class="btn btn-default" tooltip="Open"><i class="fa fa-edit"></i></button>
 		<button type="button" class="btn btn-default" tooltip="Add"><i class="fa fa-plus"></i></button>
-		<button type="button" class="btn btn-default" tooltip="Remove"><i class="fa fa-minus"></i></button>
+		<button type="button" class="btn btn-default" tooltip="Remove"><i class="fa fa-minus" style="color:red;"></i></button>
 	</div>
 </div>
 
